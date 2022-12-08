@@ -1,0 +1,34 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html{
+  scroll-behavior:smooth;
+}
+body{
+  @apply bg-bone;
+}
+button,
+input,
+textarea{
+  @apply focus:outline-none;
+}
+.router-link-active{
+  @apply text-gold font-semibold;
+}
+/* Transitions */
+.fade-enter-from,
+.fade-leave-to{
+  @apply opacity-0;
+}
+.fade-enter-active,
+.fade-leave-active{
+  @apply transition-all duration-300 ease-in-out;
+}
+.left-enter-from,
+.left-leave-to{
+  @apply -translate-x-full opacity-0;
+}
+.left-enter-active,
+.left-leave-active{
+  @apply transition-all duration-500 ease-in-out;
+}

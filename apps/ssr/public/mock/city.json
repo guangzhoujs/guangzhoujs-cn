@@ -1,0 +1,343 @@
+[
+    {
+        "code": 110100,
+        "areaname": "北京市",
+        "parentid": 110000,
+        "shortname": "北京",
+        "lng": "116.405289",
+        "lat": "39.904987",
+        "level": 2,
+        "sort": 1
+    },
+    {
+        "code": 120100,
+        "areaname": "天津市",
+        "parentid": 120000,
+        "shortname": "天津",
+        "lng": "117.190186",
+        "lat": "39.125595",
+        "level": 2,
+        "sort": 1
+    },
+    {
+        "code": 440100,
+        "areaname": "广州市",
+        "parentid": 440000,
+        "shortname": "广州",
+        "host": "guangzhoujs.cn",
+        "lng": "113.28064",
+        "lat": "23.125177",
+        "level": 2,
+        "sort": 5
+    },
+    {
+        "code": 440300,
+        "areaname": "深圳市",
+        "parentid": 440000,
+        "shortname": "深圳",
+        "lng": "114.085945",
+        "lat": "22.547001",
+        "level": 2,
+        "sort": 16
+    },
+    {
+        "code": 310100,
+        "areaname": "上海市",
+        "parentid": 310000,
+        "shortname": "上海",
+        "lng": "121.472641",
+        "lat": "31.231707",
+        "level": 2,
+        "sort": 1
+    },
+    {
+        "code": 320100,
+        "areaname": "南京市",
+        "parentid": 320000,
+        "shortname": "南京",
+        "lng": "118.76741",
+        "lat": "32.041546",
+        "level": 2,
+        "sort": 4
+    },
+    {
+        "code": 320500,
+        "areaname": "苏州市",
+        "parentid": 320000,
+        "shortname": "苏州",
+        "lng": "120.619583",
+        "lat": "31.299379",
+        "level": 2,
+        "sort": 7
+    },
+    {
+        "code": 330100,
+        "areaname": "杭州市",
+        "parentid": 330000,
+        "shortname": "杭州",
+        "lng": "120.15358",
+        "lat": "30.287458",
+        "level": 2,
+        "sort": 1
+    },
+    {
+        "code": 320100,
+        "areaname": "南京市",
+        "parentid": 320000,
+        "shortname": "南京",
+        "lng": "118.76741",
+        "lat": "32.041546",
+        "level": 2,
+        "sort": 4
+    },
+    {
+        "code": 150100,
+        "areaname": "呼和浩特市",
+        "parentid": 150000,
+        "shortname": "呼和浩特",
+        "lng": "111.670799",
+        "lat": "40.81831",
+        "level": 2,
+        "sort": 6
+    },
+    {
+        "code": 210100,
+        "areaname": "沈阳市",
+        "parentid": 210000,
+        "shortname": "沈阳",
+        "lng": "123.429092",
+        "lat": "41.796768",
+        "level": 2,
+        "sort": 12
+    },
+    {
+        "code": 210200,
+        "areaname": "大连市",
+        "parentid": 210000,
+        "shortname": "大连",
+        "lng": "121.618622",
+        "lat": "38.914589",
+        "level": 2,
+        "sort": 4
+    },
+    {
+        "code": 220100,
+        "areaname": "长春市",
+        "parentid": 220000,
+        "shortname": "长春",
+        "lng": "125.324501",
+        "lat": "43.886841",
+        "level": 2,
+        "sort": 3
+    },
+    {
+        "code": 230100,
+        "areaname": "哈尔滨市",
+        "parentid": 230000,
+        "shortname": "哈尔滨",
+        "lng": "126.642464",
+        "lat": "45.756966",
+        "level": 2,
+        "sort": 3
+    },
+    {
+        "code": 340100,
+        "areaname": "合肥市",
+        "parentid": 340000,
+        "shortname": "合肥",
+        "lng": "117.283043",
+        "lat": "31.861191",
+        "level": 2,
+        "sort": 7
+    },
+    {
+        "code": 350200,
+        "areaname": "厦门市",
+        "parentid": 350000,
+        "shortname": "厦门",
+        "lng": "118.110222",
+        "lat": "24.490475",
+        "level": 2,
+        "sort": 8
+    },
+    {
+        "code": 370100,
+        "areaname": "济南市",
+        "parentid": 370000,
+        "shortname": "济南",
+        "lng": "117.000923",
+        "lat": "36.675808",
+        "level": 2,
+        "sort": 5
+    },
+    {
+        "code": 410100,
+        "areaname": "郑州市",
+        "parentid": 410000,
+        "shortname": "郑州",
+        "lng": "113.665413",
+        "lat": "34.757977",
+        "level": 2,
+        "sort": 16
+    },
+    {
+        "code": 420100,
+        "areaname": "武汉市",
+        "parentid": 420000,
+        "shortname": "武汉",
+        "lng": "114.298569",
+        "lat": "30.584354",
+        "level": 2,
+        "sort": 12
+    },
+    {
+        "code": 430100,
+        "areaname": "长沙市",
+        "parentid": 430000,
+        "shortname": "长沙",
+        "lng": "112.982277",
+        "lat": "28.19409",
+        "level": 2,
+        "sort": 2
+    },
+    {
+        "code": 450100,
+        "areaname": "南宁市",
+        "parentid": 450000,
+        "shortname": "南宁",
+        "lng": "108.320007",
+        "lat": "22.82402",
+        "level": 2,
+        "sort": 11
+    },
+    {
+        "code": 500100,
+        "areaname": "重庆市",
+        "parentid": 500000,
+        "shortname": "重庆",
+        "lng": "106.504959",
+        "lat": "29.533155",
+        "level": 2,
+        "sort": 1
+    },
+    {
+        "code": 510100,
+        "areaname": "成都市",
+        "parentid": 510000,
+        "shortname": "成都",
+        "lng": "104.065735",
+        "lat": "30.659462",
+        "level": 2,
+        "sort": 3
+    },
+    {
+        "code": 520100,
+        "areaname": "贵阳市",
+        "parentid": 520000,
+        "shortname": "贵阳",
+        "lng": "106.713478",
+        "lat": "26.578342",
+        "level": 2,
+        "sort": 3
+    },
+    {
+        "code": 530100,
+        "areaname": "昆明市",
+        "parentid": 530000,
+        "shortname": "昆明",
+        "lng": "102.71225",
+        "lat": "25.040609",
+        "level": 2,
+        "sort": 7
+    },
+    {
+        "code": 540100,
+        "areaname": "拉萨市",
+        "parentid": 540000,
+        "shortname": "拉萨",
+        "lng": "91.13221",
+        "lat": "29.66036",
+        "level": 2,
+        "sort": 3
+    },
+    {
+        "code": 610100,
+        "areaname": "西安市",
+        "parentid": 610000,
+        "shortname": "西安",
+        "lng": "108.948021",
+        "lat": "34.263161",
+        "level": 2,
+        "sort": 7
+    },
+    {
+        "code": 620100,
+        "areaname": "兰州市",
+        "parentid": 620000,
+        "shortname": "兰州",
+        "lng": "103.823555",
+        "lat": "36.058041",
+        "level": 2,
+        "sort": 7
+    },
+    {
+        "code": 630100,
+        "areaname": "西宁市",
+        "parentid": 630000,
+        "shortname": "西宁",
+        "lng": "101.778915",
+        "lat": "36.623177",
+        "level": 2,
+        "sort": 7
+    },
+    {
+        "code": 640100,
+        "areaname": "银川市",
+        "parentid": 640000,
+        "shortname": "银川",
+        "lng": "106.278175",
+        "lat": "38.46637",
+        "level": 2,
+        "sort": 4
+    },
+    {
+        "code": 650100,
+        "areaname": "乌鲁木齐市",
+        "parentid": 650000,
+        "shortname": "乌鲁木齐",
+        "lng": "87.617729",
+        "lat": "43.792816",
+        "level": 2,
+        "sort": 17
+    },
+    {
+        "code": 710100,
+        "areaname": "台北市",
+        "parentid": 710000,
+        "shortname": "台北",
+        "lng": "121.509064",
+        "lat": "25.044333",
+        "level": 2,
+        "sort": 12
+    },
+    {
+        "code": 810100,
+        "areaname": "香港岛",
+        "parentid": 810000,
+        "shortname": "香港岛",
+        "lng": "114.173355",
+        "lat": "22.320047",
+        "level": 2,
+        "sort": 2
+    },
+    {
+        "code": 820100,
+        "areaname": "澳门半岛",
+        "parentid": 820000,
+        "shortname": "澳门半岛",
+        "lng": "113.549133",
+        "lat": "22.198751",
+        "level": 2,
+        "sort": 1
+    }
+]

@@ -1,0 +1,28 @@
+:root{
+  --animate-duration:500ms !important;
+}
+.app-page-footer{
+  .nextui-pagination-item:not(.nextui-pagination-item-active){
+    border:1px solid #d9d9d9;
+    background:#fff;
+    border-radius:5px;
+  }
+  .nextui-c-cAbbLF{
+    border-radius:5px;
+  }
+}
+button, [type="button"]{
+  background-color:none !important;
+}
+.ant-select-multiple .ant-select-selection-item-remove svg{
+  vertical-align:1px;
+}
+.article-item{
+  .bytemd-preview .markdown-body{
+    max-width:100%;
+  }
+  .markdown-body table{
+    width:100%;
+    display:table !important;
+  }
+}

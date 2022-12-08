@@ -1,0 +1,178 @@
+//圆角
+@mixin borderRadius($radius) {
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+  border-radius: $radius;
+}
+
+//定位上下左右居中
+@mixin center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+//定位上下居中
+@mixin center-y {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+//定位左右居中
+@mixin center-x {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+// 尺寸
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+//字体大小、行高、字体
+@mixin font($size, $line-height, $family: 'Microsoft YaHei') {
+  font: #{$size}/#{$line-height} $family;
+}
+
+//修改input placeholder颜色
+@mixin placeholderColor($color: #fff) {
+  &::-webkit-input-placeholder {
+    color: $color;
+  }
+  &::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: $color;
+  }
+  &:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: $color;
+  }
+  &:-ms-input-placeholder {
+    /* Internet Explorer 10-11 */
+    color: $color;
+  }
+}
+
+//多行文字超出显示省略号
+@mixin ellipsisNum($number: 1) {
+  display: -webkit-box;
+  overflow: hidden;
+  -webkit-box-orient: vertical;
+  word-break: break-all;
+  text-overflow: ellipsis;
+  -webkit-line-clamp: $number;
+}
+
+//文字一行超出显示省略号
+@mixin ellipsis ($substract:0){//`$substract`单位为%
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: $substract;
+}
+
+// 清除浮动
+@mixin clearfix {
+  @if $legacy-support-for-ie {
+    *zoom: 1;
+  }
+  &:before,
+  &:after {
+    content: "";
+    display: table;
+  }
+  &:after {
+    clear: both;
+    overflow: hidden;
+  }
+}
+
+// 吸顶导航
+@mixin fix-header($h: 70px) {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: $h;
+  z-index: 1000;
+}
+
+// 吸底导航
+@mixin fix-footer($h: 70px) {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: $h;
+  z-index: 1000;
+}
+
+// 隔行换色
+@mixin zebra-lists($evenColor, $evenBgColor, $oddColor, $oddBgColor) {
+  &:nth-child(2n) {
+    color: $evenColor;
+    background-color: $evenBgColor;
+  }
+  &:nth-child(2n + 1) {
+    color: $oddColor;
+    background-color: $oddBgColor;
+  }
+}
+
+// 首字下沉
+@mixin first-letter($font-size: 6em) {
+  &::first-letter {
+    float: left;
+    line-height: 1;
+    font-size: $font-size;
+  }
+}
+
+// 渐变
+@mixin gradient($start-color, $end-color, $orientation:'vertical') {
+  background: $start-color;
+  @if $orientation == 'vertical' {
+    background: -webkit-linear-gradient(top, $start-color, $end-color);
+    background: linear-gradient(to bottom, $start-color, $end-color);
+  } @else if $orientation == 'horizontal' {
+    background: -webkit-linear-gradient(left, $start-color, $end-color);
+    background: linear-gradient(to right, $start-color, $end-color);
+  } @else {
+    background: -webkit-radial-gradient(center, ellipse cover, $start-color, $end-color);
+    background: radial-gradient(ellipse at center, $start-color, $end-color);
+  }
+}
+// @include gradient(#07c, #06f)
+
+@mixin flex-column {
+  display: flex;
+  flex-direction: column;
+}
+
+// Flexbox Toolkit
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin flex-center-column {
+  @include flex-center;
+  flex-direction: column;
+}
+
+@mixin flex-center-vert {
+  display: flex;
+  align-items: center;
+}
+
+@mixin flex-center-horiz {
+  display: flex;
+  justify-content: center;
+}
