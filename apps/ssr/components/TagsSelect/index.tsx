@@ -7,7 +7,7 @@ const { Option } = Select
 interface IProps {
   onChange?: any
   width?: number | string
-  defaultValue?: string
+  defaultValue?: number
   config?: any
 }
 
@@ -15,6 +15,8 @@ const TagsSelect: FC<IProps> = ({ onChange, width, defaultValue, config }) => {
   const { tagsList } = useTags()
   const innerWidth = width || 120
   const style = config?.style || { width: innerWidth }
+  console.log('tagsList', tagsList)
+  console.log('defaultValue', defaultValue)
 
   return (
     <Select placeholder="请选择分类" labelInValue onChange={onChange} key={defaultValue} mode="multiple" defaultValue={defaultValue} style={style}>

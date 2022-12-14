@@ -1,3 +1,4 @@
+import { StoreKey } from '@/config'
 import { useContext, useEffect, useMemo, useState } from 'react'
 import { AuthContext } from './auth-context'
 import { IGlobalContext } from './IGlobalContext'
@@ -9,7 +10,7 @@ const AuthProvider = ({ children }: any) => {
   }>({ user: {}, isLogined: false })
 
   useEffect(() => {
-    const fuser = localStorage.getItem('f2e.user')
+    const fuser = localStorage.getItem(StoreKey)
 
     if (fuser) {
       const userInfo = JSON.parse(fuser || '{}')

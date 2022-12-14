@@ -8,8 +8,8 @@ type PostPageProps = {
   articles: any
 }
 
-const parent_id = 1
-const Article = ({ articles }: PostPageProps) => {
+const category_id = 2
+const Job = ({ articles }: PostPageProps) => {
   const { title, description } = AppConfig
 
   return (
@@ -19,16 +19,16 @@ const Article = ({ articles }: PostPageProps) => {
         <meta name="description" content={description} />
       </Head>
       <div className="app-user-page-model">
-        <Content data={articles} parent_id={parent_id} />
+        <Content data={articles} category_id={category_id} />
       </div>
     </UserLayout>
   )
 }
 
 export async function getServerSideProps() {
-  const { rows: articles } = await fetchArticleList({ params: { ...PageConfig.base, parent_id } })
+  const { rows: articles } = await fetchArticleList({ params: { ...PageConfig.base, category_id } })
 
   return { props: { articles } }
 }
 
-export default Article
+export default Job

@@ -4,6 +4,7 @@ export type RootStoreHydration = {
   user?: any
   city?: any
   isLogined: boolean
+  setIsLogined?: any
 }
 
 export default class RootStore {

@@ -59,7 +59,7 @@ const Job = ({ articles }: PostPageProps) => {
             )
           })}
         </div>
-        <div className="app-side w-96 ml-6">
+        <div className="app-side w-80 ml-6">
           <HotTag />
           <HotArticle />
         </div>

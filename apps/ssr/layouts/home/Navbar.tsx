@@ -1,12 +1,15 @@
 import { useState } from 'react'
 import { Button, Input } from 'antd'
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { Search } from '@carbon/icons-react'
-import Login from './Login'
-import { IsBrowser } from '@/components/IsBrowser'
-import UserInfo from '../common/UserInfo'
 import { useRootStore } from '@/providers/RootStoreProvider'
+import { IsBrowser } from '@/components/IsBrowser'
+import { Search } from '@carbon/icons-react'
+import { observer } from 'mobx-react-lite'
+import UserInfo from '../common/UserInfo'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
+import Login from './Login'
+import Register from './Register'
+import config from '@/config'
 
 const navItems: { label: string, page?: string, link?: string }[] = [
   { label: '首页', page: '/' },
@@ -15,10 +18,11 @@ const navItems: { label: string, page?: string, link?: string }[] = [
   { label: '英雄榜', page: '/hero' },
 ]
 
-export default function Header() {
+export default observer(function Header() {
   const { pathname } = useRouter()
   const [isLogin, setIsLogin] = useState(false)
-  const { appStore: { isLogined, user, city } } = useRootStore()
+  const [isRegister, setIsRegister] = useState(false)
+  const { appStore: { isLogined, user } } = useRootStore()
 
   const onSearch = () => {
     alert('search')
@@ -28,13 +32,21 @@ export default function Header() {
     setIsLogin(true)
   }
 
+  const onRegister = () => {
+    setIsRegister(true)
+  }
+
   // 已登录
-  const logined = <UserInfo user={user} />
+  const logined = (
+    <UserInfo user={user} />
+  )
   // 未登录
   const notLogin = (
     <>
-      <Button type="text" className="user" onClick={handleOpen}>登录</Button>
-      <Login isLogin={isLogin} setIsLogin={setIsLogin} />
+      <Button type="primary" shape="round" className="user" onClick={handleOpen}>登录</Button>
+      <Button type="text" className="user ml-3" onClick={onRegister}>注册</Button>
+      <Login isLogin={isLogin} setIsLogin={setIsLogin} setIsRegister={setIsRegister} />
+      <Register isRegister={isRegister} setIsRegister={setIsRegister} setIsLogin={setIsLogin} />
     </>
   )
 
@@ -44,7 +56,7 @@ export default function Header() {
         <div className="app-header-main">
           <div className="app-header-logo">
             <span>
-              <a href="/">{city.shortname}前端交流</a>
+              <a href="/">{config.title}</a>
             </span>
           </div>
           <div className="app-header-nav">
@@ -66,7 +78,7 @@ export default function Header() {
               <Search />
             </Button>
           </div>
-          <div className="app-header-user">
+          <div className="app-header-user -mr-1">
             <IsBrowser>
               {isLogined ? logined : notLogin}
             </IsBrowser>
@@ -75,4 +87,4 @@ export default function Header() {
       </div>
     </div>
   )
-}
+})

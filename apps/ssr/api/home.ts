@@ -26,3 +26,11 @@ export const fetchUserRegister = (params?: any) => fetchRequest({ api: 'register
 export const fetchTagsList = (params?: any) => fetchRequest({ api: 'tags/list', ...params })
 // 点赞
 export const fetchArticleLikes = (params?: any) => fetchRequest({ api: 'article/likes', ...params })
+// 登录
+export const fetchLogin = (params?: any) => fetchRequest({ api: 'login', ...params })
+// 注册
+export const fetchRegister = (params?: any) => fetchRequest({ api: 'register', ...params })
+// 忘记密码
+export const fetchForgotPassword = (params?: any) => fetchRequest({ api: 'forgotPassword', ...params })
+// 用户
+export const fetchUser = (params?: any) => fetchRequest({ api: 'user', ...params })

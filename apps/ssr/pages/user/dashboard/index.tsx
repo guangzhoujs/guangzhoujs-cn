@@ -12,7 +12,7 @@ const User = () => {
         <meta name="description" content={description} />
       </Head>
       <div className="app-user-page-model">
-        dashboard
+        dashboard22
       </div>
     </UserLayout>
   )

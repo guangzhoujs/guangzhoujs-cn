@@ -12,13 +12,13 @@ hero:
       link: /about
 features:
   - title: Hello
-    emoji: 💎
+    emoji: ⏰
     description: Put hello description here
   - title: World
-    emoji: 🌈
+    emoji: 🏐
     description: Put world description here
   - title: '!'
-    emoji: 🚀
+    emoji: 🐟
     description: Put ! description here
 ---
 

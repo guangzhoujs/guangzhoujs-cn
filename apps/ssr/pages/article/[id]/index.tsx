@@ -75,13 +75,13 @@ const Detail = ({ hc, commentData }: PostPageProps) => {
               <div className="article-body markdown-body" dangerouslySetInnerHTML={{ __html: hc.content }} />
             </div>
           </div>
-          <div id="app-comment" className="app-article-comment app-page-bg mb-6">
+          <div id="app-comment" className="app-article-comment app-page-bg mb-6" hidden>
             <CommentContext.Provider value={CommentProviderData}>
               <Comment PropData={commentList} />
             </CommentContext.Provider>
           </div>
         </div>
-        <div className="app-side w-96 ml-6">
+        <div className="app-side w-80 ml-6 sticky top-5">
           <HotTag />
           <HotArticle />
         </div>

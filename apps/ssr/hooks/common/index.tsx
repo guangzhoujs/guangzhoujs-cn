@@ -1,10 +1,8 @@
 import { useEffect, useRef } from 'react'
 import { useLocalStorageState, useSetState } from 'ahooks'
 import { fetchArticleCategory, fetchTagsList } from '@/api/home'
-import { StoreKey } from '@/config'
+import { CITY_CODE, StoreKey } from '@/config'
 // import qs from 'qs'
-
-const CITY_CODE = process.env.NEXT_PUBLIC_CITY_CODE || ''
 
 export const useMounted = () => {
   const mountedRef = useRef(false)

@@ -12,6 +12,9 @@
     align-items:center;
     height:inherit;
     margin:0 auto;
+    .ant-form-item{
+      margin-bottom:0;
+    }
     .app-header-logo{
       display:flex;
       align-items:center;
@@ -33,7 +36,7 @@
       &::after{
         position:absolute;
         right:0;
-        bottom:-17px;
+        bottom:-20px;
         left:0;
         height:4px;
         background:var(--theme-color);
@@ -42,7 +45,7 @@
     }
     .nav-link{
       margin:0 15px;
-      font-size:1.2rem;
+      font-size:1.1rem;
       word-spacing:2px;
       text-transform:uppercase;
       letter-spacing:1px;
@@ -182,6 +185,7 @@
 }
 .app-article-content{
   .article-item{
+    padding:15px 20px;
     border-bottom:1px solid #e5e7eb;
     &:last-child{
       border-bottom:none;
@@ -190,14 +194,14 @@
 }
 //container
 .article-item{
-  padding:25px 20px;
+  padding:15px 18px;
   transition:all .2s ease-in-out;
   text-decoration:none;
   h1{
-    font-size:24px;
+    font-size:16px;
     line-height:33px;
-    font-weight:500;
-    color:#252933;
+    font-weight:700;
+    color:#333;
     margin:0;
     font-family:CircularStd-Medium, helvetica, sans-serif;
     overflow:hidden;
@@ -207,10 +211,10 @@
     -webkit-line-clamp:2;
   }
   .article-body{
-    padding-top:10px;
-    font-size:16px;
+    padding-top:0px;
+    font-size:14px;
     line-height:28px;
-    color:#333;
+    color:#6b7486;
   }
 }
 .article-footer{
@@ -248,7 +252,7 @@
   min-height:calc(100vh - 185px);
 }
 .app-user-page-model{
-  min-height:calc(100vh - 115px);
+  min-height:calc(100vh - 130px);
   padding:20px;
 }
 .app-article-container{
@@ -412,6 +416,7 @@
 }
 // article
 .article-nav-list{
+  font-size:1rem;
   .active{
     background-color:#3e71f6;
     .link{
@@ -647,7 +652,7 @@
   }
 }
 .app-user-header{
-  padding:0 20px 0 0;
+  padding:0 20px;
   --tw-shadow:0 4px 3px -1px rgb(0 0 0 / 0.1), 0 2px 0px -2px rgb(0 0 0 / 0.1);
   .app-header-nav{
     flex-wrap:wrap;
@@ -671,11 +676,11 @@
   .article-item{
     border-bottom:1px solid #eee;
     h1{
-      padding-right:10%;
+      padding-right:15%;
     }
     .action{
-      top:25px;
-      right:20px;
+      top:15px;
+      right:10px;
       .ant-btn{
         &:last-child{
           margin-right:-14px;
@@ -859,7 +864,7 @@
     fill:#929eb8;
   }
   &:hover{
-    color: #515767;
+    color:#515767;
     svg{
       fill:#515767;
     }
@@ -895,4 +900,121 @@
   line-height:22px;
   color:#515767;
   margin-top:8px;
+}
+.app-register-dialog{
+  .ant-modal-body{
+    padding:30px 50px 20px;
+  }
+}
+.app-user-setting-model{
+  padding:0;
+}
+.upload-image{
+  width:200px;
+  height:200px;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  cursor:pointer;
+  position:relative;
+  // transition: opacity .3s;
+  img{
+    width:100%;
+    height:100%;
+  }
+  .upload-image-mask{
+    width:100%;
+    height:100%;
+    position:absolute;
+    top:0;
+    right:0;
+    bottom:0;
+    left:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#fff;
+    background:rgba(0, 0, 0, .5);
+    cursor:pointer;
+    opacity:0;
+    transition:opacity .3s;
+    .del-icon{
+      position:absolute;
+    }
+  }
+}
+.thumb-space{
+  .ant-space-item{
+    text-align:center;
+  }
+}
+.app-upload-wrap{
+  width:200px;
+  height:200px;
+  border:1px dashed #ccc;
+  font-size:30px;
+  border-radius:5px;
+  color:#ccc;
+  &:hover{
+    border-color:#1890ff;
+  }
+}
+.upload-image{
+  .ant-image{
+    height:150px;
+    overflow:hidden;
+  }
+}
+.app-setting-list{
+  li{
+    display:flex;
+    align-items:center;
+    padding:2rem 0;
+    border-bottom:1px solid #f1f1f1;
+    .title{
+      font-size:1rem;
+      color:#333;
+      width:10rem;
+    }
+    .input-box{
+      flex:1 1 auto;
+      display:flex;
+      width:100%;
+    }
+    .account{
+      flex:1 1 auto;
+      font-size:1.167rem;
+      color:#909090;
+    }
+    .action-box{
+      margin-left:1rem;
+    }
+  }
+}
+.app-editor-user{
+  padding-left:10px;
+  > *{
+    margin-right:20px;
+  }
+  .ant-dropdown-trigger{
+    margin-left:25px;
+    cursor:pointer;
+  }
+}
+.app-tiny-wrap{
+  .bytemd{
+    height:calc(100vh - 65px) !important;
+  }
+}
+.app-editor-drawer{
+  .ant-drawer-body{
+    padding:10px 10px;
+  }
+  .ant-collapse-content-box{
+    .ant-form-item{
+      &:last-child{
+        margin-bottom:0;
+      }
+    }
+  }
 }

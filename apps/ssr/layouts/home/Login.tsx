@@ -1,24 +1,26 @@
 import React, { FC, useState } from 'react'
 import { Form, Modal, Input, Row, Button, message } from 'antd'
 import { UserOutlined, UnlockOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-// import { useGlobalContext } from '@/context/useGlobalContext'
 import { fetchUserLogin } from '@/api/home'
-// import { useRouter } from 'next/router'
 import { Method } from 'axios'
 import qs from 'qs'
 import { isBrowser } from '@/utils'
 import { useAuth } from '@/context/auth-provider'
 import { useRootStore } from '@/providers/RootStoreProvider'
+import ForgotPassword from './ForgotPassword'
+import { StoreKey } from '@/config'
 
 interface Iprops {
   isLogin: boolean
   setIsLogin: any
+  setIsRegister: any
 }
 
 const iconRC = (visible: any) => (visible ? <EyeTwoTone /> : <EyeInvisibleOutlined />)
 
-const Login: FC<Iprops> = ({ isLogin, setIsLogin }) => {
+const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
   const [loading, setLoading] = useState(false)
+  const [isForgotPassword, setIsForgotPassword] = useState(false)
   const { appStore } = useRootStore()
   const state = useAuth()
   console.log('state', state)
@@ -46,36 +48,38 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin }) => {
   const handleFinish = (params: any) => {
     const method: Method = 'post'
     const txt = '登录成功'
+    setLoading(true)
 
     const fParams = { type: method, params }
     fetchUserLogin(fParams).then((res: any) => {
       const { token, user: userInfo } = res
-      console.log('res', res)
       message.success(txt)
 
-      if (isBrowser()) {
-        localStorage.setItem('f2e.token', token)
-        localStorage.setItem('f2e.user', JSON.stringify(userInfo))
-        appStore.hydrate({ user: userInfo, isLogined: true })
+      if (!token || !userInfo) {
+        message.success('用户信息返回出错')
+        return
       }
 
-      // console.log(user)
-
-      // setTimeout(() => {
-      // router.push('/login')
-      // })
+      if (isBrowser() && token && userInfo) {
+        localStorage.setItem(`${StoreKey}-token`, token)
+        localStorage.setItem(StoreKey, JSON.stringify(userInfo))
+        appStore.hydrate({ user: userInfo, isLogined: true })
+      }
 
       setTimeout(() => {
         setIsLogin(false)
         form.resetFields()
       }, 500)
+    }).catch((err) => {
+      console.warn(err)
+    }).finally(() => {
+      setLoading(false)
     })
   }
 
   const onFinish = () => {
     validateFields().then(async (values: any) => {
-      // Object.assign(values, { rsa_id: id, password, area_code, school_code })
-      console.log('values', values)
+      // Object.assign(values, {  })
       handleFinish(qs.stringify(values))
     })
   }
@@ -83,6 +87,19 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin }) => {
   const handleCancel = () => {
     setIsLogin(false)
     setLoading(false)
+  }
+
+  // 注册
+  const toRegister = () => {
+    setIsLogin(false)
+    setIsRegister(true)
+  }
+
+  // 找回密码
+  const toFind = () => {
+    // setIsLogin(false)
+    // setIsForgotPassword(true)
+    message.warn('请联系管理员')
   }
 
   return (
@@ -98,10 +115,11 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin }) => {
           <Button block size="large" type="primary" htmlType="submit" loading={loading}> 登录 </Button>
         </Row>
         <Row className="auth-action justify-between">
-          <Button type="link">注册</Button>
-          <Button type="link">找回密码</Button>
+          <Button type="link" onClick={toRegister}>注册</Button>
+          <Button type="link" onClick={toFind}>找回密码</Button>
         </Row>
       </Form>
+      <ForgotPassword isForgotPassword={isForgotPassword} setIsForgotPassword={setIsForgotPassword} setIsLogin={setIsLogin} />
     </Modal>
   )
 }

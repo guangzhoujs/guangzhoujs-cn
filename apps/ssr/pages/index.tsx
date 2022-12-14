@@ -1,8 +1,8 @@
+import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
 import Head from 'next/head'
 import Layout from '@/layouts/home'
 import AppConfig from '@/config'
 import { fetchArticleList } from '@/api/home'
-import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
 import { HotTag } from '@/bc/HotTag'
 import { HotArticle } from '@/bc/HotArticle'
 import Link from 'next/link'
@@ -57,7 +57,7 @@ const Home = ({ articles }: PostPageProps) => {
             )
           })}
         </div>
-        <div className="app-side w-96 ml-6">
+        <div className="app-side w-80 ml-6">
           <HotTag />
           <HotArticle />
         </div>

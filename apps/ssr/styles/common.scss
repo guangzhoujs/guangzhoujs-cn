@@ -5,6 +5,9 @@
 a{
   -webkit-tap-highlight-color:rgba(0, 0, 0, 0);
 }
+html{
+  scroll-behavior:smooth;
+}
 body{
   color:#757575;
   background-color:#f6f6f6;
@@ -74,10 +77,40 @@ svg{
     background-color:rgba(95, 95, 95, 0.7);
   }
 }
-.none,[hidden]{
+.none, [hidden]{
   display:none !important;
 }
 #nprogress .bar{
   height:2.5px !important; //进度条高度
   background:rgba(255, 0, 0, 0.66) !important; //自定义颜色
+}
+#backToTop{
+  position:fixed;
+  right:20px;
+  bottom:28px;
+  width:45px;
+  height:45px;
+  background-color:rgba(0, 0, 0, .8);
+  color:#ccc;
+  border-radius:50%;
+  padding-top:2px;
+  font-size:20px;
+  cursor:pointer;
+  text-align:center;
+  &:before{
+    content:" ";
+    display:block;
+  }
+  &:hover{
+    .anticon{
+      display:none;
+    }
+    &:before{
+      padding-top:0;
+      font-size:12px;
+      content:"回顶部";
+      line-height:42px;
+      display:block;
+    }
+  }
 }

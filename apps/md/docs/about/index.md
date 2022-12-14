@@ -1,5 +1,5 @@
 ---
-title: 关于我们 - 羊城砍柴
+title: 关于我们
 order: 1
 toc: menu
 nav:

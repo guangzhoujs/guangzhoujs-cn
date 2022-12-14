@@ -1,4 +1,6 @@
+import { notification } from 'antd'
 import { AppContext } from 'next/app'
+import { StoreKey } from '@/config'
 
 export function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
   return key in object
@@ -129,4 +131,21 @@ export const scrollTo = (id: string, contentId: string) => {
     inline: 'nearest', // 定义水平方向的对齐， "start", "center", "end", 或 "nearest"之一。默认为 "nearest"
   })
   content.focus()
+}
+
+// 用户信息
+export const getUserInfo = () => {
+  const user = localStorage.getItem(StoreKey)
+  return user ? JSON.parse(user) : null
+}
+
+export type NotificationType = 'success' | 'info' | 'warning' | 'error'
+interface INotice {
+  type?: NotificationType
+  message?: string
+  description?: string
+}
+
+export const notice = ({ type = 'success', message, description = '' }: INotice) => {
+  notification[type]({ message, description })
 }

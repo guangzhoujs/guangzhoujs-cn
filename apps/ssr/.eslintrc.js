@@ -76,5 +76,6 @@ module.exports = {
     'jsx-a11y/control-has-associated-label': 0,
     'no-restricted-syntax': 0,
     'consistent-return': 0,
+    'no-return-assign': 0,
   },
 }

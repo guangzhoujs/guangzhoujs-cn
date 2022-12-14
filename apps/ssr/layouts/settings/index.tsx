@@ -1,13 +1,13 @@
 import { Layout } from 'antd'
-import AppContent from './Content'
+import AppContent from '../user/Content'
 import AppHeader from './Header'
 import AppSider from './Sider'
 
-export default function UserLayout({ children }: any) {
+export default function SettingsLayout({ children }: any) {
   return (
-    <Layout>
+    <Layout hasSider className="app-settings-layout">
       <AppHeader />
-      <Layout className="app-user-layout container">
+      <Layout className="container" style={{ minHeight: '100vh' }}>
         <AppSider />
         <AppContent propChildren={children} />
       </Layout>

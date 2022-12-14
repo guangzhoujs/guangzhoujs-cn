@@ -20,9 +20,14 @@ button, [type="button"]{
 .article-item{
   .bytemd-preview .markdown-body{
     max-width:100%;
+    padding:0;
   }
   .markdown-body table{
     width:100%;
     display:table !important;
   }
+}
+.ant-input-number-disabled .ant-input-number-input,
+.ant-input[disabled]{
+  color:#666;
 }

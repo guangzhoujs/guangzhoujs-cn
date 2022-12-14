@@ -4,7 +4,7 @@
   "description": "static",
   "scripts": {
     "start": "pnpm run dev",
-    "dev": "dumi dev",
+    "dev": "dumi dev --port 3005",
     "build": "dumi build",
     "prepare": "husky install && dumi setup"
   },

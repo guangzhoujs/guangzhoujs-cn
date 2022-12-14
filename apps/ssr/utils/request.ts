@@ -1,5 +1,6 @@
 import Axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios'
 import { message } from 'antd'
+import { CodeMessage } from '@/config'
 // import qs from 'qs'
 
 export interface BaseResponse<T = any> {
@@ -9,7 +10,7 @@ export interface BaseResponse<T = any> {
 }
 
 const service = Axios.create({
-  baseURL: process.env.NEXT_PUBLIC_API_URL,
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/web/`,
   timeout: 10000,
 })
 
@@ -28,19 +29,33 @@ service.interceptors.response.use(
     const { data } = response
     const { code, msg } = data
 
-    if (code !== 0) {
-      data.msg && message.error(data.msg)
-      return Promise.reject(new Error(msg || 'Error'))
+    if (typeof code !== 'undefined' && code !== 0) {
+      data?.msg && message.error(data.msg)
+      return Promise.reject(msg || 'Error')
     }
+
     if (!data) {
       return Promise.reject(data)
     }
 
     return Promise.resolve(data)
   },
-  (error: { message: string }) => {
+  (error: any) => {
+    let txt = '系统异常，请稍候再试'
+    const response: any = { ...error.response }
+
+    // 处理500类型，自定义报错信息
+    if (response?.data?.code) {
+      txt = CodeMessage[response?.data?.code]
+    }
+
+    // 如果已经有错误信息
+    if (response?.data?.msg) {
+      txt = response?.data?.msg
+    }
+
     message.destroy()
-    message.error('网络异常')
+    message.error(txt)
 
     return Promise.reject(error)
   },
@@ -96,7 +111,8 @@ export const fetchRequest = ({ api, id, type = 'get', params }: { api: string, i
   // }
 
   const data = ['get', 'delete'].includes(type as string) ? { params } : { data: params }
-  const url = (id?.length && typeof id !== 'undefined') ? `/${api}/${id}` : `/${api}`
+  const url = (typeof id !== 'undefined' && id) ? `/${api}/${id}` : `/${api}`
+  // console.log('url', url)
 
   return request({
     method: type,

@@ -1,50 +1,72 @@
-import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
-import Link from 'next/link'
-import { Empty } from 'antd'
+import React, { useEffect, useState } from 'react'
+import { Empty, Spin } from 'antd'
+import { LoadingOutlined } from '@ant-design/icons'
+import InfiniteScroll from 'react-infinite-scroll-component'
+import { fetchArticleList } from '@/api/home'
+import { PageConfig } from '@/config'
+import Item from './_item'
+
+const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
 
 type PostPageProps = {
-  articles: any,
+  data: any,
+  category_id?: string
+  parent_id?: number
 }
 
-const Main = ({ articles }: PostPageProps) => {
+const Main = ({ data, category_id, parent_id }: PostPageProps) => {
+  const [, setPageNum] = useState(1)
+  const [hasMore, setHasMore] = useState(true)
+  const [posts, setPosts] = useState(data)
+  const { limit } = PageConfig.base
+
+  const getMoreArticle = (page = 1) => {
+    setTimeout(async () => {
+      const aparams = { page, limit, parent_id }
+      category_id !== '0' && Object.assign(aparams, { category_id })
+
+      const { rows: articles } = await fetchArticleList({ params: aparams })
+      articles.length ? setPosts((post: any) => [...post, ...articles]) : setHasMore(false)
+    }, 1000)
+  }
+
+  useEffect(() => {
+    if (category_id) {
+      setPosts(() => [])
+      setPageNum(1)
+      setHasMore(true)
+    }
+    getMoreArticle()
+  }, [category_id])
+
   return (
     <div className="app-article-main flex-1 app-page-bg">
       <div className="app-article-content">
-        {articles.length > 0 && articles.map((r: any) => {
-          return (
-            <div key={r.id} className="article-item relative white p-6">
-              <h1>
-                <Link href={`/article/${r.id}`}><a target="_blank" rel="noreferrer">{r.title}</a></Link>
-              </h1>
-              <div className="article-body" dangerouslySetInnerHTML={{ __html: r.summary }} />
-              <div className="article-footer flex justify-between">
-                <div className="title-info-list flex justify-between">
-                  <div className="date">
-                    <Calendar />
-                    <b>{r.create_time}</b>
-                  </div>
-                  <i>/</i>
-                  <div className="like">
-                    <ThumbsUp />
-                    <b>{r.likes}</b> 点赞
-                  </div>
-                  <i>/</i>
-                  <div className="views">
-                    <View />
-                    <b>{r.views}</b> 阅读
-                  </div>
-                </div>
-                <div className="category">
-                  <a title="Golang" href="/blog/category/17">
-                    <Category />
-                    <b>{r.category.title}</b>
-                  </a>
-                </div>
-              </div>
+        <InfiniteScroll
+          dataLength={posts?.length}
+          next={() => {
+            setPageNum((old: number) => {
+              const newPage = old + 1
+
+              getMoreArticle(newPage)
+              return newPage
+            })
+          }}
+          style={{ overflow: 'visible' }}
+          hasMore={hasMore}
+          loader={(
+            <div className="text-center py-5">
+              <Spin indicator={antIcon} />
             </div>
-          )
-        })}
-        {!articles?.length && <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+        )}
+          endMessage={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+        >
+          {posts.length > 0 && posts.map((r: any) => {
+            return (
+              <Item key={r.id} data={r} />
+            )
+          })}
+        </InfiniteScroll>
       </div>
     </div>
   )

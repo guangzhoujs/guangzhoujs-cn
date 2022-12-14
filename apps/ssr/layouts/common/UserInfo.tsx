@@ -1,22 +1,36 @@
-import { Dropdown, Menu, Space } from 'antd'
 import React from 'react'
+import { Dropdown, Menu, Space } from 'antd'
 import { ProfileOutlined, HomeOutlined, SettingOutlined, LoginOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import { StoreKey } from '@/config'
+import { useRootStore } from '@/providers/RootStoreProvider'
+import { isBrowser } from '@/utils'
+import Router from 'next/router'
 
-const onDropMenu = (e: any) => {
-  if (e.key === 'uppassword') {
-    // setIsUppasswordShow(true)
+const toHome = (appStore: any) => {
+  if (isBrowser()) {
+    appStore.hydrate({ user: null, isLogined: false })
+    localStorage.removeItem(StoreKey)
+    localStorage.removeItem(`${StoreKey}-token`)
   }
+
+  setTimeout(() => {
+    Router.push({ pathname: '/' })
+    window.location.reload()
+  }, 1000)
+}
+
+const onDropMenu = (e: any, appStore: any) => {
   if (e.key === 'logout') {
-    // userStore.logout()
-    localStorage.removeItem('v5-user')
-    // toLogin()
+    toHome(appStore)
   }
 }
 
 const UserInfo = ({ user }: any) => {
+  const { appStore } = useRootStore()
+
   const dropMenu = (
-    <Menu className="app-overlay-menu" onClick={onDropMenu}>
+    <Menu className="app-overlay-menu" onClick={(e: any) => onDropMenu(e, appStore)}>
       <Menu.Item key="index">
         <Space>
           <ProfileOutlined />
@@ -25,11 +39,11 @@ const UserInfo = ({ user }: any) => {
           </Link>
         </Space>
       </Menu.Item>
-      <Menu.Item key="uppassword">
+      <Menu.Item>
         <Space>
           <HomeOutlined />
-          <Link href={`/user/${user.id}`}>
-            <span>我的主页</span>
+          <Link href="/user/job">
+            <span>我的招聘</span>
           </Link>
         </Space>
       </Menu.Item>
@@ -38,6 +52,14 @@ const UserInfo = ({ user }: any) => {
           <SettingOutlined />
           <Link href="/user/profile">
             <span>个人资料</span>
+          </Link>
+        </Space>
+      </Menu.Item>
+      <Menu.Item key="settings">
+        <Space>
+          <SettingOutlined />
+          <Link href="/user/account">
+            <span>账号设置</span>
           </Link>
         </Space>
       </Menu.Item>
@@ -52,8 +74,8 @@ const UserInfo = ({ user }: any) => {
   )
 
   return (
-    <Dropdown overlay={dropMenu} placement="bottomRight">
-      <span>{user.nick_name}</span>
+    <Dropdown overlay={dropMenu} placement="bottom">
+      <div>{user.nick_name}</div>
     </Dropdown>
   )
 }

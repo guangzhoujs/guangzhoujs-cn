@@ -9,7 +9,7 @@ module.exports = withAntdLess({
   },
 
   images: {
-    domains: ['localhost', 'milu.blog'],
+    domains: ['localhost', 'zhjs.top'],
   },
 
   lessLoaderOptions: {

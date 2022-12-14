@@ -78,7 +78,7 @@ const JobDetail = ({ hc, commentData }: PostPageProps) => {
             </CommentContext.Provider>
           </div>
         </div>
-        <div className="app-side w-96 ml-6">
+        <div className="app-side w-80 ml-6">
           <HotTag />
           <HotArticle />
         </div>

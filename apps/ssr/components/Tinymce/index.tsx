@@ -1,19 +1,28 @@
 /* eslint-disable max-len */
 import { Editor } from '@tinymce/tinymce-react'
+import { useEffect, useRef } from 'react'
 import 'tinymce/skins/ui/oxide/skin.min.css'
 
 const Tinymce = (props: any) => {
   const { content, onEditorChange } = props
   const tinyKey = 'i9loif5tptrktatd5nsxz66i1iqnijfpotc1lqs9mf24za7q'
+  const editorRef = useRef(null)
+
+  useEffect(() => {
+    if (content) {
+      editorRef.current = content
+    }
+  }, [content])
 
   return (
     <Editor
       apiKey={tinyKey}
-      value={content}
+      onInit={(evt: any, editor: any) => editorRef.current = editor}
+      // value={content}
       onEditorChange={onEditorChange}
       init={{
         language: 'zh_CN',
-        height: '85vh',
+        height: '93vh',
         content_style: 'body { font-family:Helvetica,Arial,sans-serif; font-size:14px }',
         menubar: false,
         toolbar: 'code undo redo restoredraft | cut copy | forecolor backcolor bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | bullist numlist blockquote subscript superscript removeformat | formatselect fontselect fontsizeselect | table image media charmap emoticons hr pagebreak print preview | fullscreen | bdmap indent2em lineheight formatpainter axupimgs',

@@ -1,14 +1,14 @@
-import { DashboardOutlined, FileOutlined, UserAddOutlined } from '@ant-design/icons'
-import { UserProfile, UserSettings, Model, Help } from '@carbon/icons-react'
+import { UserAddOutlined } from '@ant-design/icons'
+import { UserProfile, UserSettings, Model } from '@carbon/icons-react'
 
 const router: Array<any> = [
-  {
-    path: '/user/dashboard',
-    key: '/user/dashboard',
-    label: '工作台',
-    name: 'dashboard',
-    icon: <DashboardOutlined />,
-  },
+  // {
+  //   path: '/user/dashboard',
+  //   key: '/user/dashboard',
+  //   label: '工作台',
+  //   name: 'dashboard',
+  //   icon: <DashboardOutlined />,
+  // },
   {
     path: '/user/article',
     key: '/user/article',
@@ -37,19 +37,19 @@ const router: Array<any> = [
     name: 'account',
     icon: <UserSettings />,
   },
-  {
-    label: '帮助中心',
-    icon: <Help />,
-    children: [
-      {
-        label: '常见问题',
-        key: '/user/help/qa',
-        path: '/user/help/qa',
-        name: 'qa',
-        icon: <FileOutlined />,
-      },
-    ],
-  },
+  // {
+  //   label: '帮助中心',
+  //   icon: <Help />,
+  //   children: [
+  //     {
+  //       label: '常见问题',
+  //       key: '/user/help/qa',
+  //       path: '/user/help/qa',
+  //       name: 'qa',
+  //       icon: <FileOutlined />,
+  //     },
+  //   ],
+  // },
 ]
 
 export default router

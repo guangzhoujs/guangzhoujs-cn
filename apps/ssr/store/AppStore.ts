@@ -1,3 +1,4 @@
+import { isUndefined } from 'lodash'
 import { makeObservable, action, observable } from 'mobx'
 
 export type CounterHydration = {
@@ -50,11 +51,11 @@ export default class AppStore {
   }
 
   hydrate(data: CounterHydration) {
-    if (data.user) {
+    if (!isUndefined(data.user)) {
       this.setUser(data.user)
     }
 
-    if (data.isLogined) {
+    if (!isUndefined(data.isLogined)) {
       this.setIsLogined(data.isLogined)
     }
   }

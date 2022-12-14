@@ -56,7 +56,7 @@ const ArticleSharing = ({ PropData }: any) => {
       <div className={classNames('action-btn with-badge', { ok: liked })} data-badge={likes} onClick={() => onLikes()}>
         <ThumbsUpFilled className="animated" />
       </div>
-      <div className="action-btn with-badge" data-badge={comment_count} onClick={() => onComment()}>
+      <div className="action-btn with-badge" hidden data-badge={comment_count} onClick={() => onComment()}>
         <Chat className="animated" />
       </div>
       <div className="app-article-popup">

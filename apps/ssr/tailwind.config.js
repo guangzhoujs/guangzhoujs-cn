@@ -9,6 +9,11 @@ module.exports = {
   theme: {
     container: {
       center: true,
+      screens: {
+        mobile: '640px',
+        tablet: '960px',
+        desktop: '1200px',
+      },
     },
     extend: {
       colors: {
