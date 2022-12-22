@@ -1,6 +1,12 @@
 :root{
   --animate-duration:500ms !important;
 }
+ol, ul, dl{
+  margin-bottom:0;
+}
+img{
+  display:inline-block;
+}
 .app-page-footer{
   .nextui-pagination-item:not(.nextui-pagination-item-active){
     border:1px solid #d9d9d9;
@@ -18,9 +24,12 @@ button, [type="button"]{
   vertical-align:1px;
 }
 .article-item{
-  .bytemd-preview .markdown-body{
-    max-width:100%;
-    padding:0;
+  .bytemd-preview{
+    .markdown-body{
+      max-width:100%;
+      padding:10px;
+      line-height:26px;
+    }
   }
   .markdown-body table{
     width:100%;

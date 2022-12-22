@@ -1,17 +1,20 @@
 import React from 'react'
 import { Dropdown, Menu, Space } from 'antd'
-import { ProfileOutlined, HomeOutlined, SettingOutlined, LoginOutlined } from '@ant-design/icons'
-import Link from 'next/link'
-import { StoreKey } from '@/config'
+import { ProfileOutlined, UserAddOutlined, LoginOutlined } from '@ant-design/icons'
 import { useRootStore } from '@/providers/RootStoreProvider'
+import { UserProfile, UserSettings } from '@carbon/icons-react'
+import { removeToken } from '@/utils/auth'
+import { StoreKey } from '@/config'
 import { isBrowser } from '@/utils'
 import Router from 'next/router'
+import Link from 'next/link'
 
 const toHome = (appStore: any) => {
   if (isBrowser()) {
     appStore.hydrate({ user: null, isLogined: false })
     localStorage.removeItem(StoreKey)
     localStorage.removeItem(`${StoreKey}-token`)
+    removeToken()
   }
 
   setTimeout(() => {
@@ -39,17 +42,17 @@ const UserInfo = ({ user }: any) => {
           </Link>
         </Space>
       </Menu.Item>
-      <Menu.Item>
+      <Menu.Item key="job">
         <Space>
-          <HomeOutlined />
+          <UserAddOutlined />
           <Link href="/user/job">
             <span>我的招聘</span>
           </Link>
         </Space>
       </Menu.Item>
-      <Menu.Item key="settings">
+      <Menu.Item key="profile">
         <Space>
-          <SettingOutlined />
+          <UserProfile />
           <Link href="/user/profile">
             <span>个人资料</span>
           </Link>
@@ -57,7 +60,7 @@ const UserInfo = ({ user }: any) => {
       </Menu.Item>
       <Menu.Item key="settings">
         <Space>
-          <SettingOutlined />
+          <UserSettings />
           <Link href="/user/account">
             <span>账号设置</span>
           </Link>

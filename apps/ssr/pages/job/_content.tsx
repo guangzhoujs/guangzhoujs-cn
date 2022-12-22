@@ -2,24 +2,21 @@ import React, { useEffect, useState } from 'react'
 import { Empty, Spin } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import InfiniteScroll from 'react-infinite-scroll-component'
-import { fetchUserArticleList } from '@/api/home'
-import { useRouter } from 'next/router'
+import { fetchArticleList } from '@/api/home'
 import { PageConfig } from '@/config'
-import Item from './post-item'
+import Item from '../_common/job-item'
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
 
 const Content = ({ data, category_id, parent_id }: any) => {
-  const router = useRouter()
   const [, setPageNum] = useState(2)
   const [hasMore, setHasMore] = useState(true)
   const [posts, setPosts] = useState(data)
-  const { user_id } = router.query
   const { limit } = PageConfig.base
 
   const getMoreArticle = (page = 2) => {
     setTimeout(async () => {
-      const { rows: articles } = await fetchUserArticleList({ params: { page, limit, category_id, parent_id, user_id } })
+      const { rows: articles } = await fetchArticleList({ params: { page, limit, category_id, parent_id } })
 
       articles.length ? setPosts((post: any) => [...post, ...articles]) : setHasMore(false)
     }, 1000)
@@ -48,7 +45,7 @@ const Content = ({ data, category_id, parent_id }: any) => {
             <Spin indicator={antIcon} />
           </div>
         )}
-        endMessage={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+        endMessage={<div className="app-home-empty mb-6"><Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>}
       >
         {posts.length > 0 && posts.map((r: any) => {
           return (

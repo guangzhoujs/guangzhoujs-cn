@@ -3,7 +3,10 @@ const withAntdLess = require('next-with-less')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 
+const isProd = process.env.NODE_ENV === 'production'
+
 module.exports = withAntdLess({
+  basePath: isProd ? '/ssr' : '',
   experimental: {
     forceSwcTransforms: true,
   },
@@ -43,8 +46,4 @@ module.exports = withAntdLess({
 
     return config
   },
-  webpackDevMiddleware: (config) => {
-    return config
-  },
-
 })

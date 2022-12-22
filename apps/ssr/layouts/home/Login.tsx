@@ -9,6 +9,7 @@ import { useAuth } from '@/context/auth-provider'
 import { useRootStore } from '@/providers/RootStoreProvider'
 import ForgotPassword from './ForgotPassword'
 import { StoreKey } from '@/config'
+import { setToken } from '@/utils/auth'
 
 interface Iprops {
   isLogin: boolean
@@ -61,6 +62,7 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
       }
 
       if (isBrowser() && token && userInfo) {
+        setToken(token)
         localStorage.setItem(`${StoreKey}-token`, token)
         localStorage.setItem(StoreKey, JSON.stringify(userInfo))
         appStore.hydrate({ user: userInfo, isLogined: true })
@@ -104,7 +106,7 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
 
   return (
     <Modal title="注册登录" className="app-auth-dialog" forceRender open={isLogin} onOk={onFinish} width={450} footer={null} destroyOnClose onCancel={handleCancel} afterClose={afterClose}>
-      <Form className="app-login-form" name="basic" layout="vertical" form={form} preserve={false} requiredMark={false} onFinish={onFinish} initialValues={{ username: 'admin', password: 'admin' }}>
+      <Form className="app-login-form" name="basic" layout="vertical" form={form} preserve={false} requiredMark={false} onFinish={onFinish} initialValues={{ username: 'admin', password: '123456' }}>
         <Form.Item name="username" rules={rules.username}>
           <Input size="large" autoComplete="off" prefix={<UserOutlined />} placeholder="请输入用户名" />
         </Form.Item>

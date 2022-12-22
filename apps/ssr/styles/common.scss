@@ -90,18 +90,20 @@ svg{
   bottom:28px;
   width:45px;
   height:45px;
-  background-color:rgba(0, 0, 0, .8);
-  color:#ccc;
+  background-color:rgba(0, 0, 0, .2);
+  color:#fff;
   border-radius:50%;
   padding-top:2px;
   font-size:20px;
   cursor:pointer;
   text-align:center;
+  transition:all .2s;
   &:before{
     content:" ";
     display:block;
   }
   &:hover{
+    background-color:rgba(0, 0, 0, .8);
     .anticon{
       display:none;
     }

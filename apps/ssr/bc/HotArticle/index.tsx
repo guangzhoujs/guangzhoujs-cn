@@ -1,30 +1,25 @@
 import { Blog } from '@carbon/icons-react'
+import { Empty } from 'antd'
 
-export function HotArticle() {
+type PostPageProps = {
+  hots: any,
+}
+
+export function HotArticle({ hots }: PostPageProps) {
   return (
     <div className="sider-items app-hot-article">
       <div className="sider-title">
         <h1><Blog />热门文章</h1>
       </div>
       <div className="sider-content">
-        <a href="#" target="_blank" className="link">
-          <div className="text-body">微信小程序转为App并上架应用市场</div>
-        </a>
-        <a href="#" target="_blank" className="link">
-          <div className="text-body">CSS美化一个Bootstrap4下拉菜单（dropdown）</div>
-        </a>
-        <a href="#" target="_blank" className="link">
-          <div className="text-body">Java 并发编程解析 | 基于JDK源码解析Java领域中的并发锁，我们可以从中学习到什么内容？</div>
-        </a>
-        <a href="#" target="_blank" className="link">
-          <div className="text-body">微信小程序转为App并上架应用市场</div>
-        </a>
-        <a href="#" target="_blank" className="link">
-          <div className="text-body">CSS美化一个Bootstrap4下拉菜单（dropdown）</div>
-        </a>
-        <a href="#" target="_blank" className="link">
-          <div className="text-body">Java 并发编程解析 | 基于JDK源码解析Java领域中的并发锁，我们可以从中学习到什么内容？</div>
-        </a>
+        {hots?.length > 0 && hots.map((h: any) => {
+          return (
+            <a href={`/article/${h.id}`} target="_blank" key={h.id} className="link" rel="noreferrer">
+              <div className="text-body">{h.title}</div>
+            </a>
+          )
+        })}
+        {!hots.length && <div style={{ paddingBottom: '10px' }}><Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>}
       </div>
     </div>
   )

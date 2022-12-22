@@ -77,5 +77,6 @@ module.exports = {
     'no-restricted-syntax': 0,
     'consistent-return': 0,
     'no-return-assign': 0,
+    'array-callback-return': 0,
   },
 }

@@ -23,7 +23,7 @@ const Main = ({ data, category_id, parent_id }: PostPageProps) => {
   const getMoreArticle = (page = 1) => {
     setTimeout(async () => {
       const aparams = { page, limit, parent_id }
-      category_id !== '0' && Object.assign(aparams, { category_id })
+      Object.assign(aparams, { category_id })
 
       const { rows: articles } = await fetchArticleList({ params: aparams })
       articles.length ? setPosts((post: any) => [...post, ...articles]) : setHasMore(false)

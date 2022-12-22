@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
-import { Card, Button, Form, Input, Row, Col, Popconfirm, Space } from 'antd'
-import Image from 'next/image'
-import AppConfig from '@/config'
+import { Card, Button, Form, Input, Row, Col, Popconfirm, Space, Image } from 'antd'
+// import Image from 'next/image'
+import AppConfig, { fallback } from '@/config'
 import AppUpload from '@/components/AppUpload'
 import UserLayout from '@/layouts/user'
 import { fetchUser } from '@/api/home'
@@ -12,11 +12,6 @@ import { getUserInfo, notice } from '@/utils'
 const { TextArea } = Input
 
 const defaultInit = {
-  github: 'http://github.com/jikeytang',
-  gitee: 'http://gitee.com/jikeytang',
-  juejin: 'http://juejin.cn/jikeytang',
-  bilibili: 'http://bilibili.com/jikeytang',
-  zhihu: 'http://zhihu.com/jikeytang',
 }
 
 const Profile = () => {
@@ -58,7 +53,7 @@ const Profile = () => {
   const handleFinish = (params: any) => {
     let method: Method = 'post'
     let txt = '新增成功'
-    const id = data?.id
+    const id = params?.id
     setLoading2(true)
 
     if (isEdit) {
@@ -69,6 +64,7 @@ const Profile = () => {
     const fParams = { id, type: method, params }
     fetchUser(fParams).then(() => {
       notice({ message: txt })
+    }).finally(() => {
       setLoading2(false)
     })
   }
@@ -104,7 +100,7 @@ const Profile = () => {
         <title>个人资料 - {title}</title>
         <meta name="description" content={description} />
       </Head>
-      <div className="app-user-page-model app-user-setting-model">
+      <div className="app-user-page-model app-page-bg app-user-setting-model">
         <Card title="个人资料" bordered={false} loading={loading}>
           <Form
             form={form}
@@ -117,6 +113,9 @@ const Profile = () => {
             onFinishFailed={onFinishFailed}
             autoComplete="off"
           >
+            <Form.Item name="id" noStyle>
+              <Input hidden />
+            </Form.Item>
             <Row>
               <Col span={16}>
                 <Form.Item label="用户名" name="username">
@@ -125,32 +124,32 @@ const Profile = () => {
                 <Form.Item label="邮件" name="email">
                   <Input disabled />
                 </Form.Item>
-                <Form.Item label="昵称" name="nick_name" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input disabled />
+                <Form.Item label="昵称" name="nick_name" rules={[{ required: true, message: '请输入昵称!' }]}>
+                  <Input placeholder="请输入昵称" />
                 </Form.Item>
-                <Form.Item label="Github" name="github" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input />
+                <Form.Item label="Github" name="github" rules={[{ required: true, message: '请输入github!' }]}>
+                  <Input placeholder="请输入github" />
                 </Form.Item>
-                <Form.Item label="Gitee" name="gitee" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input />
+                <Form.Item label="Gitee" name="gitee" rules={[{ required: true, message: '请输入gitee!' }]}>
+                  <Input placeholder="请输入gitee" />
                 </Form.Item>
-                <Form.Item label="Juejin" name="juejin" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input />
+                <Form.Item label="Juejin" name="juejin" rules={[{ required: true, message: '请输入juejin!' }]}>
+                  <Input placeholder="请输入juejin" />
                 </Form.Item>
-                <Form.Item label="Bilibili" name="bilibili" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input />
+                <Form.Item label="Bilibili" name="bilibili" rules={[{ required: true, message: '请输入bilibili!' }]}>
+                  <Input placeholder="请输入bilibili" />
                 </Form.Item>
-                <Form.Item label="Zhihu" name="zhihu" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input />
+                <Form.Item label="Zhihu" name="zhihu" rules={[{ required: true, message: '请输入zhihu!' }]}>
+                  <Input placeholder="请输入zhihu" />
                 </Form.Item>
-                {/* <Form.Item label="Weixin" name="weixin" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <Input />
+                {/* <Form.Item label="Weixin" name="weixin" rules={[{ required: true, message: '请输入weixin!' }]}>
+                  <Input placeholder="请输入weixin" />
                 </Form.Item> */}
-                <Form.Item label="个人介绍" name="description" rules={[{ required: true, message: 'Please input your password!' }]}>
-                  <TextArea showCount maxLength={100} autoSize={{ minRows: 3, maxRows: 5 }} />
+                <Form.Item label="个人介绍" name="description" rules={[{ required: true, message: '请输入个人介绍!' }]}>
+                  <TextArea showCount maxLength={100} autoSize={{ minRows: 3, maxRows: 5 }} placeholder="请输入个人介绍" />
                 </Form.Item>
                 <Form.Item wrapperCol={{ offset: 4, span: 18 }}>
-                  <Button type="primary" loading={loading2} htmlType="submit"> 保存 </Button>
+                  <Button type="primary" size="large" className="w-32" loading={loading2} htmlType="submit"> 保存 </Button>
                 </Form.Item>
               </Col>
               <Col span={8}>
@@ -158,7 +157,12 @@ const Profile = () => {
                   {data.avatar ? (
                     <div className="upload-image">
                       <Space direction="vertical" size={15} className="thumb-space">
-                        <Image width={150} height={150} src={API_URL + data.avatar} />
+                        <Image
+                          fallback={fallback}
+                          width={150}
+                          height={150}
+                          src={API_URL + data.avatar}
+                        />
                         <Popconfirm title="确定要删除吗?" onConfirm={() => onDelImg(data.avatar)}>
                           <Button type="default" danger size="small">删除</Button>
                         </Popconfirm>

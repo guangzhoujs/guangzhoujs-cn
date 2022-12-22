@@ -1,6 +1,7 @@
 import Axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios'
 import { message } from 'antd'
-import { CodeMessage } from '@/config'
+import { CodeMessage, StoreKey, TokenKey } from '@/config'
+import { isBrowser } from '.'
 // import qs from 'qs'
 
 export interface BaseResponse<T = any> {
@@ -9,7 +10,7 @@ export interface BaseResponse<T = any> {
   message: string
 }
 
-const service = Axios.create({
+export const service = Axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/web/`,
   timeout: 10000,
 })
@@ -17,6 +18,11 @@ const service = Axios.create({
 service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     // config.data = qs.stringify(config.data) // 转为 formdata 数据格式
+    if (isBrowser()) {
+      const token = localStorage.getItem(`${StoreKey}-token`)
+      token && (config!.headers!.Authorization = `Bearer ${token}`)
+    }
+
     return config
   },
   (error: { message: string }) => {
@@ -119,4 +125,10 @@ export const fetchRequest = ({ api, id, type = 'get', params }: { api: string, i
     url,
     ...data,
   })
+}
+
+// 保存token到客户端
+export const setServiceToken = (req: any) => {
+  const token = req.cookies[TokenKey]
+  service.defaults.headers.common.Authorization = `Bearer ${token}`
 }

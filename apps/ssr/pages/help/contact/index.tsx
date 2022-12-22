@@ -1,10 +1,10 @@
+/* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
 import Layout from '@/layouts/home'
 import AppConfig from '@/config'
-import Logo from '@/public/images/logo.png'
-import Image from 'next/image'
-import { Divider } from 'antd'
+import { Divider, Image } from 'antd'
 import Link from 'next/link'
+import { IsBrowser } from '@/components/IsBrowser'
 
 const Contact = () => {
   const { title, description } = AppConfig
@@ -22,20 +22,27 @@ const Contact = () => {
         <Divider />
         <div className="app-about-body flex content-center justify-center">
           <div className="img mr-5">
-            <Image alt="Vercel logo" src={Logo} width={200} height={150} />
+            <Image preview={false} alt="Vercel logo" src="/images/logo.png" width={200} height={150} />
           </div>
           <div className="main">
             <div className="app-main-title text-xl mb-4">
-              <h1>Hi，我们是身在广州的一群从事前端的小伙伴。</h1>
+              <h1>Hi，通过以下方式找到我们：</h1>
             </div>
             <div className="app-about-content text-base">
-              <p>我们有着同一个信仰，同一个信念，同一个信心。</p>
-              <p>生活中有泪水，工作中有汗水，学习中有苦水，</p>
-              <p>但我们仍然坚信科技改变世界，代码改变生活，双手改变未来。</p>
-              <p>加油，我们一直在路上。</p>
+              <p>广州前端求职内推Q群：175869166</p>
+              <p>微信群满200人，加Q群后邀请加入。</p>
               <p>
-                <Link href="https://github.com/guangzhoujs/gzjs">
-                  <a target="_blank" rel="noreferrer">https://github.com/guangzhoujs/gzjs</a>
+                <a target="_blank" href="https://qm.qq.com/cgi-bin/qm/qr?k=fSwcq7J06jwJtZ0IF2caJO3Unp990kpi&jump_from=webapi&authKey=NA1P3OG9kSmqnER4lf9Z7Ln3o2D5H+3nCDsDlKbE+ePHwpn5in6H7obWnDA7bYIK" rel="noreferrer">
+                  <img src="//pub.idqqimg.com/wpa/images/group.png" alt="广州前端求职内推群" title="广州前端求职内推群" />
+                </a>
+              </p>
+              <IsBrowser>
+                <Image src="/images/qq.jpg" width={170} height={250} />
+              </IsBrowser>
+              <Divider />
+              <p>
+                <Link href="https://github.com/guangzhoujs/">
+                  <a className="text-blue-500" target="_blank" rel="noreferrer">https://github.com/guangzhoujs/</a>
                 </Link>
               </p>
             </div>

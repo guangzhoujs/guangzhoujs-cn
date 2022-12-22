@@ -1,24 +1,25 @@
 /* eslint-disable max-len */
 import { Editor } from '@tinymce/tinymce-react'
-import { useEffect, useRef } from 'react'
+// import { useEffect, useRef } from 'react'
 import 'tinymce/skins/ui/oxide/skin.min.css'
 
 const Tinymce = (props: any) => {
   const { content, onEditorChange } = props
   const tinyKey = 'i9loif5tptrktatd5nsxz66i1iqnijfpotc1lqs9mf24za7q'
-  const editorRef = useRef(null)
+  // const editorRef = useRef(null)
 
-  useEffect(() => {
-    if (content) {
-      editorRef.current = content
-    }
-  }, [content])
+  // useEffect(() => {
+  //   if (content) {
+  //     editorRef.current = content
+  //   }
+  // }, [content])
 
   return (
     <Editor
+      inline={false}
       apiKey={tinyKey}
-      onInit={(evt: any, editor: any) => editorRef.current = editor}
-      // value={content}
+      // onInit={(evt: any, editor: any) => editorRef.current = editor}
+      initialValue={content}
       onEditorChange={onEditorChange}
       init={{
         language: 'zh_CN',

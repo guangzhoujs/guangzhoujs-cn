@@ -1,5 +1,5 @@
-import { UserAddOutlined } from '@ant-design/icons'
-import { UserProfile, UserSettings, Model } from '@carbon/icons-react'
+import { UserAddOutlined, ProfileOutlined } from '@ant-design/icons'
+import { UserProfile, UserSettings, ApplicationWeb } from '@carbon/icons-react'
 
 const router: Array<any> = [
   // {
@@ -14,7 +14,7 @@ const router: Array<any> = [
     key: '/user/article',
     label: '我的文章',
     name: 'article',
-    icon: <Model />,
+    icon: <ProfileOutlined />,
   },
   {
     path: '/user/job',
@@ -22,6 +22,13 @@ const router: Array<any> = [
     label: '我的招聘',
     name: 'job',
     icon: <UserAddOutlined />,
+  },
+  {
+    path: '/user/app',
+    key: '/user/app',
+    label: '我的应用',
+    name: 'app',
+    icon: <ApplicationWeb />,
   },
   {
     path: '/user/profile',

@@ -11,8 +11,9 @@ interface IProps {
 /**
  * 复制到剪切板
  */
-export default (props: IProps) => {
+const Clipboard = (props: IProps) => {
   const { text, children } = props
+
   return (
     <Tooltip title="点击复制">
       <CopyToClipboard
@@ -26,3 +27,5 @@ export default (props: IProps) => {
     </Tooltip>
   )
 }
+
+export default Clipboard

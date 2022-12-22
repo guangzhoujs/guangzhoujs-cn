@@ -199,9 +199,8 @@
   text-decoration:none;
   h1{
     font-size:16px;
-    line-height:33px;
+    line-height:25px;
     font-weight:700;
-    color:#333;
     margin:0;
     font-family:CircularStd-Medium, helvetica, sans-serif;
     overflow:hidden;
@@ -209,11 +208,15 @@
     -webkit-box-orient:vertical;
     display:-webkit-box;
     -webkit-line-clamp:2;
+    &:hover{
+      color:var(--theme-color);
+      z-index:1;
+    }
   }
   .article-body{
-    padding-top:0px;
-    font-size:14px;
-    line-height:28px;
+    padding-top:8px;
+    font-size:16px;
+    line-height:22px;
     color:#6b7486;
   }
 }
@@ -248,11 +251,12 @@
     }
   }
 }
+.app-page-normal,
 .app-page-model{
   min-height:calc(100vh - 185px);
 }
 .app-user-page-model{
-  min-height:calc(100vh - 130px);
+  min-height:calc(100vh - 190px);
   padding:20px;
 }
 .app-article-container{
@@ -399,8 +403,9 @@
   overflow:hidden;
 }
 .app-hero-model{
-  padding:20px;
-  .app-hero-page{
+  padding:20px 0;
+  .user-list-wrap{
+    min-height:calc(100vh - 300px);
   }
   .user-list{
     margin-top:0;
@@ -411,7 +416,7 @@
   .hero-list-item{
     text-align:center;
     line-height:26px;
-    padding-bottom:0.5rem;
+    padding-bottom:0.2rem;
   }
 }
 // article
@@ -491,9 +496,6 @@
 }
 // job
 .app-job-model{
-  .article-item{
-    padding:30px;
-  }
 }
 .app-detail-overview{
   .avatar{
@@ -679,7 +681,7 @@
       padding-right:15%;
     }
     .action{
-      top:15px;
+      top:10px;
       right:10px;
       .ant-btn{
         &:last-child{
@@ -918,6 +920,10 @@
   cursor:pointer;
   position:relative;
   // transition: opacity .3s;
+  .ant-image{
+    height:150px;
+    overflow:hidden;
+  }
   img{
     width:100%;
     height:100%;
@@ -959,12 +965,6 @@
     border-color:#1890ff;
   }
 }
-.upload-image{
-  .ant-image{
-    height:150px;
-    overflow:hidden;
-  }
-}
 .app-setting-list{
   li{
     display:flex;
@@ -997,7 +997,6 @@
     margin-right:20px;
   }
   .ant-dropdown-trigger{
-    margin-left:25px;
     cursor:pointer;
   }
 }
@@ -1015,6 +1014,76 @@
       &:last-child{
         margin-bottom:0;
       }
+    }
+  }
+}
+.app-id-container{
+  .app-page-bg{
+    &:first-child{
+      min-height:calc(100vh - 135px);
+    }
+  }
+}
+.app-tags-model{
+  a{
+    color:#fff;
+    opacity:0.6;
+    &:hover{
+      color:#ff0;
+      opacity:1;
+    }
+  }
+}
+.app-home-empty{
+  min-height:calc(100vh - 190px);
+}
+.app-hero-empty{
+  min-height:calc(100vh - 290px);
+}
+.app-not-found{
+  padding-top:20%;
+}
+.useinfo-word{
+  min-height:58px;
+  .sub{
+    line-height:20px;
+    margin-bottom:0;
+    @include ellipsisNum(2);
+  }
+}
+.app-change-editor{
+  .ant-tooltip-inner{
+    padding:10px 12px;
+    color:#333;
+  }
+}
+.app-editor-pen-icon{
+  position:relative;
+  top:3px;
+}
+.col-applist-item{
+  .app-icon{
+    width:120px;
+    height:120px;
+    border-radius: 10px;
+    color: #fff;
+    font-size:40px;
+    line-height:120px;
+    text-align:center;
+    transition: all .2s ease-in-out;
+    &:hover{
+      transform: scale(1.15);
+    }
+  }
+  .item-url{
+    .title{
+      padding:10px 0 0px;
+      font-size:16px;
+      font-weight:bold;
+    }
+    .desc{
+      font-size:14px;
+      color: #999;
     }
   }
 }

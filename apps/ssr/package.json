@@ -11,6 +11,7 @@
     "debugger": "cross-env NODE_OPTIONS='--inspect' next dev"
   },
   "dependencies": {
+    "@ant-design/icons": "^4.8.0",
     "@bytemd/plugin-gfm": "^1.17.2",
     "@bytemd/plugin-highlight-ssr": "^1.17.2",
     "@bytemd/react": "^1.17.2",
@@ -19,11 +20,12 @@
     "@tinymce/tinymce-react": "^4.2.0",
     "ahooks": "^3.7.1",
     "animate.css": "^4.1.1",
-    "antd": "^4.23.1",
+    "antd": "^4.24.5",
     "axios": "^0.27.2",
     "bytemd": "^1.17.2",
     "classnames": "^2.3.2",
     "dayjs": "^1.11.5",
+    "js-cookie": "^3.0.1",
     "juejin-markdown-themes": "^1.29.3",
     "lodash": "^4.17.21",
     "marked": "^4.1.1",

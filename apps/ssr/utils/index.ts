@@ -69,7 +69,7 @@ export function handleTree(data: any, id?: string, parentIdParams?: string, chil
  * @param str
  * @returns {string|void}
  */
-export function btoa(str: string) {
+export function toBtoa(str: string) {
   return str ? window.btoa(unescape(encodeURIComponent(JSON.stringify(str)))) : console.warn('str不能为空')
 }
 
@@ -78,7 +78,7 @@ export function btoa(str: string) {
  * @param str
  * @returns {string|void}
  */
-export function atob(str: string) {
+export function toAtob(str: string) {
   return str ? decodeURIComponent(escape(window.atob(str))) : console.warn('str不能为空')
 }
 
@@ -135,6 +135,8 @@ export const scrollTo = (id: string, contentId: string) => {
 
 // 用户信息
 export const getUserInfo = () => {
+  if (!isBrowser()) return null
+
   const user = localStorage.getItem(StoreKey)
   return user ? JSON.parse(user) : null
 }

@@ -12,7 +12,7 @@ const Nav = ({ categories }: PostPageProps) => {
   return (
     <div className="app-article-nav w-32 mr-6">
       <nav className="article-nav-list">
-        {categories.length > 0 && categories.map((r: any) => {
+        {categories?.length > 0 && categories.map((r: any) => {
           const catId = !r.id ? 0 : r.id
           const activeCls = catId === parseInt(category_id as string, 10) ? 'active' : ''
           const url = `/article/category/${catId}`

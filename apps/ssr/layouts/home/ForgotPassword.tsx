@@ -81,10 +81,6 @@ const ForgotPassword: FC<Iprops> = ({ isForgotPassword, setIsForgotPassword, set
   }
 
   const initialValues = {
-    username: 'yang',
-    email: 'yang@123.com',
-    password: '123456',
-    ret_password: '123456',
   }
 
   return (

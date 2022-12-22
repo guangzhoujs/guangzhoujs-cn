@@ -52,11 +52,11 @@ export function useArticleCategory(params?: any) {
     const fetchData = async () => {
       const { rows } = await fetchArticleCategory(params)
 
-      if (!isMounted()) {
+      if (!isMounted() || !rows) {
         return
       }
 
-      setState({ categoryList: rows[0].children, loading: false })
+      setState({ categoryList: rows[0]?.children, loading: false })
     }
 
     setState({ loading: true, run: fetchData })

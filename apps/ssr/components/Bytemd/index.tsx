@@ -23,7 +23,7 @@ const Btmd = (props: any) => {
     <Editor
       mode="split"
       locale={zhHans}
-      value={editorRef.current || ''}
+      value={editorRef.current || content}
       plugins={plugins}
       onChange={(v: string) => {
         editorRef.current = v

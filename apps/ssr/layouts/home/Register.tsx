@@ -1,11 +1,8 @@
 import React, { FC, useState } from 'react'
 import { Form, Modal, Input, Row, Button, message, Checkbox } from 'antd'
-// import { useGlobalContext } from '@/context/useGlobalContext'
 import { fetchRegister } from '@/api/home'
-import { Method } from 'axios'
-// import { useAuth } from '@/context/auth-provider'
 import { CITY_CODE } from '@/config'
-// import qs from 'qs'
+import { Method } from 'axios'
 
 interface Iprops {
   isRegister: boolean
@@ -15,19 +12,17 @@ interface Iprops {
 
 const Register: FC<Iprops> = ({ isRegister, setIsRegister, setIsLogin }) => {
   const [loading, setLoading] = useState(false)
-  // const state = useAuth()
-  // console.log('state', state)
   const [form] = Form.useForm()
   const { validateFields } = form
   const rules = {
     username: [
       { required: true, message: '请输入用户名' },
       { whitespace: true, message: '姓名不能为空' },
-      { min: 3, max: 10, message: '长度在 3 到 10 个字符' },
+      { min: 4, max: 10, message: '长度在 4 到 10 个字符' },
     ],
     password: [
       { required: true, message: '请输入密码' },
-      { min: 3, max: 10, message: '长度在 3 到 10 个字符' },
+      { min: 6, max: 10, message: '长度在 6 到 10 个字符' },
     ],
     email: [
       { required: true, message: '请输入邮箱' },
@@ -48,8 +43,7 @@ const Register: FC<Iprops> = ({ isRegister, setIsRegister, setIsLogin }) => {
     setLoading(true)
 
     const fParams = { type: method, params }
-    fetchRegister(fParams).then((res: any) => {
-      console.log('res', res)
+    fetchRegister(fParams).then(() => {
       message.success(txt)
 
       setTimeout(() => {
@@ -65,6 +59,7 @@ const Register: FC<Iprops> = ({ isRegister, setIsRegister, setIsLogin }) => {
   }
 
   const defalutValue = {
+    status: 1,
     city_code: CITY_CODE,
     birthday: '1970-01-01 20:51:57',
   }
@@ -73,6 +68,8 @@ const Register: FC<Iprops> = ({ isRegister, setIsRegister, setIsLogin }) => {
   const onFinish = () => {
     validateFields().then(async (values: any) => {
       delete values.ret_password
+
+      values.nick_name = values.username
 
       Object.assign(values, { ...defalutValue })
       handleFinish(values)
@@ -107,10 +104,6 @@ const Register: FC<Iprops> = ({ isRegister, setIsRegister, setIsLogin }) => {
   })
 
   const initialValues = {
-    username: 'yang',
-    email: 'yang@123.com',
-    password: '123456',
-    ret_password: '123456',
   }
 
   return (

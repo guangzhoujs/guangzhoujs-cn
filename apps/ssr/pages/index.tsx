@@ -1,17 +1,20 @@
 import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
 import Head from 'next/head'
 import Layout from '@/layouts/home'
-import AppConfig from '@/config'
-import { fetchArticleList } from '@/api/home'
-import { HotTag } from '@/bc/HotTag'
-import { HotArticle } from '@/bc/HotArticle'
+import AppConfig, { PageConfig } from '@/config'
+import { fetchArticleHot, fetchArticleList, fetchTagsList } from '@/api/home'
+import Sidebar from '@/pages/article/_sidebar'
 import Link from 'next/link'
+import { Empty } from 'antd'
 
 type PostPageProps = {
   articles: any,
+  hots: any,
+  tags: any
 }
 
-const Home = ({ articles }: PostPageProps) => {
+const parent_id = 1
+const Home = ({ articles, hots, tags }: PostPageProps) => {
   const { title, description } = AppConfig
 
   return (
@@ -56,23 +59,21 @@ const Home = ({ articles }: PostPageProps) => {
               </div>
             )
           })}
+          {!articles.length && <div className="article-item app-home-empty app-page-bg relative white mb-6"><Empty image={Empty.PRESENTED_IMAGE_SIMPLE} /></div>}
         </div>
-        <div className="app-side w-80 ml-6">
-          <HotTag />
-          <HotArticle />
-        </div>
+        <Sidebar tags={tags} hots={hots} />
       </div>
     </Layout>
   )
 }
 
 export async function getStaticProps() {
-  const { rows: articles } = await fetchArticleList()
+  const { rows: articles } = await fetchArticleList({ params: { ...PageConfig.base, parent_id } })
+  const { rows: hots } = await fetchArticleHot()
+  const { rows: tags } = await fetchTagsList()
 
   return {
-    props: {
-      articles,
-    },
+    props: { articles, hots, tags },
   }
 }
 

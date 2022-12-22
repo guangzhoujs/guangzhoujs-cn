@@ -5,6 +5,7 @@ import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import Link from 'next/link'
 
 const Item = ({ data: r }: any) => {
+  const editType = r.md ? 'type=md&' : ''
   const onDelete = (id: string) => {
     alert(id)
   }
@@ -40,7 +41,7 @@ const Item = ({ data: r }: any) => {
         </div>
       </div>
       <div className="action absolute">
-        <Link href={`/editor?type=md&id=${r.id}`}>
+        <Link href={`/editor?${editType}id=${r.id}`}>
           <a target="_blank" rel="noreferrer">
             <Button type="link" icon={<EditOutlined />}>编辑</Button>
           </a>

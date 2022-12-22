@@ -30,7 +30,7 @@ const User = ({ categories, articles }: PostPageProps) => {
 export async function getServerSideProps() {
   const { rows: categories } = await fetchArticleCategory()
   const { rows: articles } = await fetchArticleList()
-  categories[0].children.unshift({ id: '', title: '全部' })
+  categories[0]?.children.unshift({ id: '', title: '全部' })
 
   return { props: { categories, articles } }
 }

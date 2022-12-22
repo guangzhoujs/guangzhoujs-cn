@@ -59,16 +59,14 @@ const Account = () => {
         <title>账户设置 - {title}</title>
         <meta name="description" content={description} />
       </Head>
-      <div className="app-user-page-model app-user-setting-model">
+      <div className="app-user-page-model app-page-bg app-user-setting-model">
         <Card title="账户设置" bordered={false} loading={loading}>
           <ul className="app-setting-list">
             <li>
               <div className="title">用户名</div>
               <div className="input-box">
-                <span className="account">15*****5391</span>
-                <div className="action-box">
-                  <Button type="link">换绑</Button>
-                </div>
+                <span className="account">{data.username}</span>
+                <div className="action-box" />
               </div>
             </li>
             <li>

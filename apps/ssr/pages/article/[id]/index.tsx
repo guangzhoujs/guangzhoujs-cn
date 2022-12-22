@@ -2,12 +2,11 @@ import React, { useMemo } from 'react'
 import Head from 'next/head'
 import Layout from '@/layouts/home'
 import AppConfig from '@/config'
-import { fetchArticleDetail, fetchCommentList } from '@/api/home'
-import { Chat, ThumbsUp, View, TextCreation } from '@carbon/icons-react'
+import { fetchArticleDetail, fetchArticleHot, fetchCommentList, fetchTagsList } from '@/api/home'
+import { ThumbsUp, View, TextCreation } from '@carbon/icons-react'
 import ArticleSharing from '@/components/ArticleSharing'
 import { CommentContext } from '@/pages/_common/comment-context'
-import { HotTag } from '@/bc/HotTag'
-import { HotArticle } from '@/bc/HotArticle'
+import Sidebar from '@/pages/article/_sidebar'
 import Image from 'next/image'
 import Comment from '@/bc/Comment'
 import { handleTree } from '@/utils'
@@ -15,9 +14,11 @@ import { handleTree } from '@/utils'
 type PostPageProps = {
   hc: any,
   commentData: any,
+  hots: any,
+  tags: any,
 }
 
-const Detail = ({ hc, commentData }: PostPageProps) => {
+const Detail = ({ hc, commentData, hots, tags }: PostPageProps) => {
   const { title, description } = AppConfig
   const { commentList } = commentData
   const src = 'https://pica.zhimg.com/691df473a_is.jpg?source=32738c0c'
@@ -31,13 +32,13 @@ const Detail = ({ hc, commentData }: PostPageProps) => {
   return (
     <Layout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{hc.title} - {title}</title>
         <meta name="description" content={description} />
       </Head>
-      <div className="app-job-model flex container mx-auto mt-6">
+      <div className="app-id-container app-article-model flex container mx-auto mt-6">
         <ArticleSharing PropData={hc} />
         <div className="app-main flex-1">
-          <div className="article-item app-page-bg relative white mb-6 app-page-bg">
+          <div className="article-item app-page-bg relative white mb-6">
             <div className="app-job-title mb-6">
               <h1>{hc.title}</h1>
             </div>
@@ -56,8 +57,8 @@ const Detail = ({ hc, commentData }: PostPageProps) => {
                 <div className="statis">
                   <div className="author">{hc.author}</div>
                   <div className="assist flex">
-                    <div className="comment"><Chat />{hc.comment_count} 评论</div>
-                    <i>/</i>
+                    {/* <div className="comment"><Chat />{hc.comment_count} 评论</div>
+                    <i>/</i> */}
                     <div className="like"><ThumbsUp /><b>{hc.likes}</b> 点赞</div>
                     <i>/</i>
                     <div className="views"><View /><b>{hc.views}</b> 阅读</div>
@@ -81,10 +82,7 @@ const Detail = ({ hc, commentData }: PostPageProps) => {
             </CommentContext.Provider>
           </div>
         </div>
-        <div className="app-side w-80 ml-6 sticky top-5">
-          <HotTag />
-          <HotArticle />
-        </div>
+        <Sidebar hots={hots} tags={tags} />
       </div>
     </Layout>
   )
@@ -94,10 +92,14 @@ export async function getServerSideProps({ params }: any) {
   const { id } = params
   const { rows: hc } = await fetchArticleDetail({ id })
   const { rows: comments } = await fetchCommentList({ id })
+  const { rows: hots } = await fetchArticleHot()
+  const { rows: tags } = await fetchTagsList()
 
   return {
     props: {
       hc,
+      hots,
+      tags,
       commentData: {
         articleId: id,
         commentList: handleTree(comments),

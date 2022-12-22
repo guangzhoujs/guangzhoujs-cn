@@ -34,8 +34,8 @@ const About = () => {
               <p>但我们仍然坚信科技改变世界，代码改变生活，双手改变未来。</p>
               <p>加油，我们一直在路上。</p>
               <p>
-                <Link href="https://github.com/guangzhoujs/gzjs">
-                  <a target="_blank" rel="noreferrer">https://github.com/guangzhoujs/gzjs</a>
+                <Link href="https://github.com/guangzhoujs/">
+                  <a target="_blank" rel="noreferrer">https://github.com/guangzhoujs/</a>
                 </Link>
               </p>
             </div>
