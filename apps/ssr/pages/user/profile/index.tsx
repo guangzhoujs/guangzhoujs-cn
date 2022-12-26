@@ -97,7 +97,7 @@ const Profile = () => {
   return (
     <UserLayout>
       <Head>
-        <title>个人资料 - {title}</title>
+        <title>{`个人资料 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-user-page-model app-page-bg app-user-setting-model">

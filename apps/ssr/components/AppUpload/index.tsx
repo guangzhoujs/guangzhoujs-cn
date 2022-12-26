@@ -10,7 +10,7 @@ interface Iprops {
   onFail?: any,
 }
 
-const AppUpload: FC<Iprops> = ({ title = '上传', accept = '.jpg, .jpeg, .png', config, onSuccess, onFail }) => {
+const AppUpload: FC<Iprops> = ({ accept = '.jpg, .jpeg, .png', config, onSuccess, onFail }) => {
   const photoProps = {
     name: 'file',
     // headers: {
@@ -38,7 +38,6 @@ const AppUpload: FC<Iprops> = ({ title = '上传', accept = '.jpg, .jpeg, .png',
     },
   }
   Object.assign(photoProps, config)
-  console.log('title', title)
 
   return (
     <Upload {...photoProps}>

@@ -56,7 +56,7 @@ export default observer(function Header() {
         <div className="app-header-main">
           <div className="app-header-logo">
             <span>
-              <a href="/">{config.title}</a>
+              <Link href="/">{config.title}</Link>
             </span>
           </div>
           <div className="app-header-nav">
@@ -64,8 +64,12 @@ export default observer(function Header() {
               const cur = page.includes('article') ? '/article/category/[category_id]' : page
 
               return (
-                <Link href={page} key={label}>
-                  <a className={pathname === cur ? 'active nav-link' : 'nav-link'}>{label}</a>
+                <Link
+                  href={page}
+                  key={label}
+                  className={pathname === cur ? 'active nav-link' : 'nav-link'}
+                >
+                  {label}
                 </Link>
               )
             })}

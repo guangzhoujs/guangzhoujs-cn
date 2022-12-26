@@ -1,7 +1,7 @@
 import Head from 'next/head'
 import UserLayout from '@/layouts/user'
 import AppConfig, { PageConfig } from '@/config'
-import { fetchArticleList } from '@/api/home'
+import { fetchUserArticleList } from '@/api/home'
 import Content from '../_common/post-content'
 import { setServiceToken } from '@/utils/request'
 
@@ -16,7 +16,7 @@ const Job = ({ articles }: PostPageProps) => {
   return (
     <UserLayout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-user-page-model app-page-bg">
@@ -31,7 +31,7 @@ export async function getServerSideProps({ req }: any) {
   setServiceToken(req)
 
   try {
-    const { rows: articles } = await fetchArticleList({ params: { ...PageConfig.base, category_id } })
+    const { rows: articles } = await fetchUserArticleList({ params: { ...PageConfig.base, category_id } })
     return { props: { articles } }
   } catch (err: any) {
     return {

@@ -3,16 +3,17 @@ const withAntdLess = require('next-with-less')
 const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 
-const isProd = process.env.NODE_ENV === 'production'
-
 module.exports = withAntdLess({
-  basePath: isProd ? '/ssr' : '',
+  generateBuildId: async () => 'v3',
+  trailingSlash: true,
   experimental: {
-    forceSwcTransforms: true,
+    // forceSwcTransforms: true,
+    concurrentFeatures: true,
+    serverComponents: true,
   },
 
   images: {
-    domains: ['localhost', 'zhjs.top'],
+    domains: ['localhost', 'zhjs.top', 'guangzhoujs.cn'],
   },
 
   lessLoaderOptions: {
@@ -24,8 +25,8 @@ module.exports = withAntdLess({
     },
   },
 
-  reactStrictMode: true,
-  swcMinify: true,
+  reactStrictMode: false,
+  swcMinify: false,
 
   webpack: (config) => {
     config.resolve.alias['@'] = path.resolve(__dirname)

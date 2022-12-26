@@ -25,7 +25,6 @@ const ArticleSharing = ({ PropData }: any) => {
 
     localStorage.setItem(idsKey, JSON.stringify([...likedIds, articleId]))
   }
-  console.log('articleId', articleId)
 
   const handleLike = () => {
     const method: Method = 'post'

@@ -1,6 +1,6 @@
 import { useContext } from 'react'
 import { fetchCommentInsert } from '@/api/home'
-import { CommentContext } from '@/pages/_common/comment-context'
+import CommentContext from '@/bc/_common/_comment-context'
 import { useDebounceFn } from 'ahooks'
 import { Input, Button, Form, message } from 'antd'
 import { Method } from 'axios'

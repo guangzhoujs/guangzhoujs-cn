@@ -22,12 +22,14 @@ const Content = ({ data, category_id, parent_id }: any) => {
       const { rows: articles } = await fetchUserArticleList({ params: { page, limit, category_id, parent_id, user_id } })
 
       articles.length ? setPosts((post: any) => [...post, ...articles]) : setHasMore(false)
-    }, 1000)
+    }, 500)
   }
 
   useEffect(() => {
     getMoreArticle()
   }, [])
+
+  if (!posts?.length) return null
 
   return (
     <>
@@ -36,6 +38,7 @@ const Content = ({ data, category_id, parent_id }: any) => {
         next={() => {
           setPageNum((old: number) => {
             const newPage = old + 1
+            console.log('newPage', newPage)
 
             getMoreArticle(newPage)
             return newPage

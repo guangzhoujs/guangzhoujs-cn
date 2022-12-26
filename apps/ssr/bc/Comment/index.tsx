@@ -15,14 +15,7 @@ const Comment = ({ PropData }: PostPageProps) => {
     <Card title="评论区">
       <div className="comment-card flex mb-3">
         <div className="comment-avatar mr-2">
-          <Image
-            loader={() => src}
-            src={src}
-            alt="Picture of the author"
-            className="rounded-full"
-            width={38}
-            height={38}
-          />
+          <Image loader={() => src} src={src} alt="Picture of the author" className="rounded-full" width={38} height={38} />
         </div>
         <div className="comment-body flex-1">
           <CommentInput />

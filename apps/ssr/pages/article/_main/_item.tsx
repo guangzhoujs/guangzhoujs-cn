@@ -3,10 +3,12 @@ import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
 import Link from 'next/link'
 
 const Item = ({ data: r }: any) => {
+  if (!r?.id) return null
+
   return (
-    <div data-key={r.id} className="article-item relative white p-2">
+    <div data-key={r?.id} className="article-item relative white p-2">
       <h1>
-        <Link href={`/article/${r.id}`}><a target="_blank" rel="noreferrer">{r.title}</a></Link>
+        <Link href={`/article/${r?.id}`} target="_blank" rel="noreferrer">{r.title}</Link>
       </h1>
       <div className="article-body" dangerouslySetInnerHTML={{ __html: r.summary }} />
       <div className="article-footer flex justify-between">
@@ -27,10 +29,10 @@ const Item = ({ data: r }: any) => {
           </div>
         </div>
         <div className="category">
-          <a title="Golang" href="/blog/category/17">
+          <Link title="Golang" href="/blog/category/17">
             <Category />
             <b>{r.category.title}</b>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

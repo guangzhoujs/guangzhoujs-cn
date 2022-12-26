@@ -1,15 +1,14 @@
 import React, { FC, useState } from 'react'
 import { Form, Modal, Input, Row, Button, message } from 'antd'
 import { UserOutlined, UnlockOutlined, EyeInvisibleOutlined, EyeTwoTone } from '@ant-design/icons'
-import { fetchUserLogin } from '@/api/home'
-import { Method } from 'axios'
-import qs from 'qs'
-import { isBrowser } from '@/utils'
-import { useAuth } from '@/context/auth-provider'
 import { useRootStore } from '@/providers/RootStoreProvider'
 import ForgotPassword from './ForgotPassword'
-import { StoreKey } from '@/config'
+import { fetchUserLogin } from '@/api/home'
 import { setToken } from '@/utils/auth'
+import { isBrowser } from '@/utils'
+import { StoreKey } from '@/config'
+import { Method } from 'axios'
+import qs from 'qs'
 
 interface Iprops {
   isLogin: boolean
@@ -23,8 +22,6 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
   const [loading, setLoading] = useState(false)
   const [isForgotPassword, setIsForgotPassword] = useState(false)
   const { appStore } = useRootStore()
-  const state = useAuth()
-  console.log('state', state)
   // const router = useRouter()
   const [form] = Form.useForm()
   const { validateFields } = form

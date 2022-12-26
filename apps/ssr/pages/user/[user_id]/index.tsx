@@ -17,7 +17,7 @@ const User = ({ categories, articles }: PostPageProps) => {
   return (
     <UserLayout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-page-model app-article-model flex my-6">

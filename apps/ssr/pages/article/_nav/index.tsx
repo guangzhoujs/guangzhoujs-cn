@@ -19,9 +19,7 @@ const Nav = ({ categories }: PostPageProps) => {
 
           return (
             <h2 key={r.id} className={classNames(activeCls)}>
-              <Link href={url}>
-                <a className="link">{r.title}</a>
-              </Link>
+              <Link href={url} className="link"> {r.title} </Link>
             </h2>
           )
         })}

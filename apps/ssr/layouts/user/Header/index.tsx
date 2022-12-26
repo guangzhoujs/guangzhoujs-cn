@@ -23,10 +23,8 @@ export default function AppHeader() {
         <div className="app-header-main flex justify-between items-center">
           <div className="app-logo app-logo-on">
             <div className="logo-wrap">
-              <Link href="/">
-                <a rel="noreferrer">
-                  <Image alt="Vercel logo" src={Logo} width={45} height={45} />
-                </a>
+              <Link href="/" rel="noreferrer">
+                <Image alt="Vercel logo" src={Logo} width={45} height={45} />
               </Link>
             </div>
           </div>

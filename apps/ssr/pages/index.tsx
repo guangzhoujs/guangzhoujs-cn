@@ -20,7 +20,7 @@ const Home = ({ articles, hots, tags }: PostPageProps) => {
   return (
     <Layout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-home-container flex container mx-auto mt-6">
@@ -29,7 +29,7 @@ const Home = ({ articles, hots, tags }: PostPageProps) => {
             return (
               <div key={r.id} className="article-item app-page-bg relative white mb-6">
                 <h1>
-                  <Link href={`/article/${r.id}`}><a target="_blank" rel="noreferrer">{r.title}</a></Link>
+                  <Link href={`/article/${r.id}`} target="_blank" rel="noreferrer">{r.title}</Link>
                 </h1>
                 <div className="article-body" dangerouslySetInnerHTML={{ __html: r.summary }} />
                 <div className="article-footer flex justify-between">

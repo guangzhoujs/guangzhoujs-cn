@@ -12,8 +12,6 @@ export const fetchArticleDelete = (params?: any) => fetchRequest({ api: 'article
 export const fetchArticleDetail = (params?: any) => fetchRequest({ api: 'article/detail', ...params })
 // 热门文章
 export const fetchArticleHot = (params?: any) => fetchRequest({ api: 'article/hot', ...params })
-// 英雄列表
-export const fetchUserList = (params: any) => fetchRequest({ api: 'user/list', ...params })
 // 文章分类列表
 export const fetchArticleCategory = (params?: any) => fetchRequest({ api: 'article/category/list', ...params })
 // 评论列表
@@ -34,6 +32,8 @@ export const fetchLogin = (params?: any) => fetchRequest({ api: 'login', ...para
 export const fetchRegister = (params?: any) => fetchRequest({ api: 'register', ...params })
 // 忘记密码
 export const fetchForgotPassword = (params?: any) => fetchRequest({ api: 'forgotPassword', ...params })
+// 英雄列表
+export const fetchUserList = (params: any) => fetchRequest({ api: 'user/list', ...params })
 // 用户
 export const fetchUser = (params?: any) => fetchRequest({ api: 'user', ...params })
 // 用户文章列表

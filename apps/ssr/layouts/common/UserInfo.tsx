@@ -37,7 +37,7 @@ const UserInfo = ({ user }: any) => {
       <Menu.Item key="index">
         <Space>
           <ProfileOutlined />
-          <Link href="/user/article">
+          <Link href="/user/article" legacyBehavior>
             <span>我的文章</span>
           </Link>
         </Space>
@@ -45,7 +45,7 @@ const UserInfo = ({ user }: any) => {
       <Menu.Item key="job">
         <Space>
           <UserAddOutlined />
-          <Link href="/user/job">
+          <Link href="/user/job" legacyBehavior>
             <span>我的招聘</span>
           </Link>
         </Space>
@@ -53,7 +53,7 @@ const UserInfo = ({ user }: any) => {
       <Menu.Item key="profile">
         <Space>
           <UserProfile />
-          <Link href="/user/profile">
+          <Link href="/user/profile" legacyBehavior>
             <span>个人资料</span>
           </Link>
         </Space>
@@ -61,7 +61,7 @@ const UserInfo = ({ user }: any) => {
       <Menu.Item key="settings">
         <Space>
           <UserSettings />
-          <Link href="/user/account">
+          <Link href="/user/account" legacyBehavior>
             <span>账号设置</span>
           </Link>
         </Space>

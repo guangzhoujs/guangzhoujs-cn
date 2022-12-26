@@ -14,17 +14,17 @@ export default function SiderMenu() {
     <div className="app-sider-menu">
       <Row className="app-sider-write p-2" gutter={10}>
         <Col span="12">
-          <Link href="/editor?type=md">
-            <a target="_blank" rel="noreferrer">
-              <Button type="primary">写文章</Button>
-            </a>
+          <Link href="/editor?type=md" target="_blank" rel="noreferrer">
+
+            <Button type="primary">写文章</Button>
+
           </Link>
         </Col>
         <Col span="12">
-          <Link href="/editor">
-            <a target="_blank" rel="noreferrer">
-              <Button>发招聘</Button>
-            </a>
+          <Link href="/editor" target="_blank" rel="noreferrer">
+
+            <Button>发招聘</Button>
+
           </Link>
         </Col>
       </Row>

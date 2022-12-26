@@ -1,13 +1,16 @@
 import React from 'react'
 import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
+import Link from 'next/link'
 
 const JobItem = ({ data: r }: any) => {
+  if (!r?.id) return null
+
   const link = `/job/${r.id}`
 
   return (
     <div key={r.id} className="article-item app-page-bg relative white mb-6">
       <h1>
-        <a target="_blank" href={link} className="link" rel="noreferrer">{r.title}</a>
+        <Link target="_blank" href={link} className="link" rel="noreferrer">{r.title}</Link>
       </h1>
       <div className="article-body" dangerouslySetInnerHTML={{ __html: r.summary }} />
       <div className="article-footer flex justify-between">
@@ -28,10 +31,10 @@ const JobItem = ({ data: r }: any) => {
           </div>
         </div>
         <div className="category">
-          <a title="Golang" href="/blog/category/17">
+          <Link title="Golang" href="/blog/category/17">
             <Category />
             <b>{r.category.title}</b>
-          </a>
+          </Link>
         </div>
       </div>
     </div>

@@ -5,7 +5,7 @@ import AppConfig from '@/config'
 import { fetchArticleDetail, fetchArticleHot, fetchCommentList, fetchTagsList } from '@/api/home'
 import { ThumbsUp, View, TextCreation } from '@carbon/icons-react'
 import ArticleSharing from '@/components/ArticleSharing'
-import { CommentContext } from '@/pages/_common/comment-context'
+import CommentContext from '@/bc/_common/_comment-context'
 import Sidebar from '@/pages/article/_sidebar'
 import Image from 'next/image'
 import Comment from '@/bc/Comment'
@@ -27,7 +27,6 @@ const Detail = ({ hc, commentData, hots, tags }: PostPageProps) => {
     () => ({ commentData }),
     [commentData],
   )
-  console.log('hc', hc)
 
   return (
     <Layout>

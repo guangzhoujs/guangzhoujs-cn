@@ -2,6 +2,7 @@ import { useEffect, useRef } from 'react'
 import { useLocalStorageState, useSetState } from 'ahooks'
 import { fetchArticleCategory, fetchTagsList } from '@/api/home'
 import { CITY_CODE, StoreKey } from '@/config'
+import data from '@/public/mock/city.json'
 // import qs from 'qs'
 
 export const useMounted = () => {
@@ -17,24 +18,8 @@ export const useMounted = () => {
 
 // 当前城市信息
 export function useCity() {
-  const [state, setState] = useSetState<{ cityInfo: any, loading: boolean, run: any }>({ cityInfo: {}, loading: false, run: () => { } })
-
-  useEffect(() => {
-    const fetchData = async () => {
-      fetch('/mock/city.json')
-        .then((response) => response.json())
-        .then((res: any) => {
-          const city = res.find((item: any) => item.code === +CITY_CODE)
-          setState({ cityInfo: city || {}, loading: false })
-        })
-        .catch(() => { console.log('error') })
-    }
-
-    setState({ loading: true, run: fetchData })
-    fetchData()
-  }, [])
-
-  return state
+  const city = data.find((item: any) => item.code === +CITY_CODE)
+  return { cityInfo: city }
 }
 
 // 当前用户信息

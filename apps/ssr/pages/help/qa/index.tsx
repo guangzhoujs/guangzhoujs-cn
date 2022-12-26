@@ -8,7 +8,7 @@ const Qa = () => {
   return (
     <UserLayout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-user-page-model">

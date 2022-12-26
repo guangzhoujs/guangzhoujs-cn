@@ -1,10 +1,10 @@
-import Head from 'next/head'
-import Layout from '@/layouts/home'
-import AppConfig, { PageConfig } from '@/config'
-import Nav from '../../_nav'
-import Sidebar from '../../_sidebar'
-import Main from '../../_main'
 import { fetchArticleCategory, fetchArticleHot, fetchArticleList, fetchTagsList } from '@/api/home'
+import AppConfig, { PageConfig } from '@/config'
+import Layout from '@/layouts/home'
+import Sidebar from '../_sidebar'
+import Head from 'next/head'
+import Nav from '../_nav'
+import Main from '../_main'
 
 type PostPageProps = {
   categories: any
@@ -21,7 +21,7 @@ const Hero = ({ categories, articles, category_id, hots, tags }: PostPageProps) 
   return (
     <Layout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-page-model app-article-model flex container mx-auto my-6 justify-end">

@@ -75,7 +75,7 @@ const Hero = ({ users, total }: PostPageProps) => {
   }, [users])
 
   // 分页处理
-  const onPaginationChange = (page: number) => {
+  const onPaginationChange = (page = 1) => {
     pageRef.current = page
     Router.push({ pathname: '/hero', query: { page } })
   }
@@ -83,7 +83,7 @@ const Hero = ({ users, total }: PostPageProps) => {
   return (
     <Layout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`英雄榜 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-page-model app-hero-model container mx-auto my-6 white">
@@ -138,8 +138,8 @@ const Hero = ({ users, total }: PostPageProps) => {
   )
 }
 
-export async function getServerSideProps({ query }: any) {
-  const { page = 1 } = query
+export async function getStaticProps({ query }: any) {
+  const page = query?.page || 1
   const { rows: users, total } = await fetchUserList({ params: { page, limit: 10 } })
 
   return { props: { users, total } }

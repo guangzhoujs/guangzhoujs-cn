@@ -4,6 +4,7 @@ import { LoadingOutlined } from '@ant-design/icons'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { fetchArticleList } from '@/api/home'
 import { PageConfig } from '@/config'
+import { isUndefined } from 'lodash'
 import Item from './_item'
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
@@ -27,7 +28,7 @@ const Main = ({ data, category_id, parent_id }: PostPageProps) => {
 
       const { rows: articles } = await fetchArticleList({ params: aparams })
       articles.length ? setPosts((post: any) => [...post, ...articles]) : setHasMore(false)
-    }, 1000)
+    }, 500)
   }
 
   useEffect(() => {
@@ -38,6 +39,8 @@ const Main = ({ data, category_id, parent_id }: PostPageProps) => {
     }
     getMoreArticle()
   }, [category_id])
+
+  if (isUndefined(posts?.length)) return null
 
   return (
     <div className="app-article-main flex-1 app-page-bg">
@@ -63,7 +66,7 @@ const Main = ({ data, category_id, parent_id }: PostPageProps) => {
         >
           {posts.length > 0 && posts.map((r: any) => {
             return (
-              <Item key={r.id} data={r} />
+              <Item key={r?.id} data={r} />
             )
           })}
         </InfiniteScroll>

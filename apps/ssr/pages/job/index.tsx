@@ -18,7 +18,7 @@ const Job = ({ articles, hots, tags }: PostPageProps) => {
   return (
     <Layout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-page-model app-job-model flex container mx-auto mt-6">

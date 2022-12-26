@@ -24,17 +24,8 @@ const CommentItem = ({ PropData }: PostPageProps) => {
 
   return (
     <div className="comment-list flex mb-3">
-      <Link href="">
-        <a className="user-link mr-2">
-          <Image
-            loader={() => src}
-            src={src}
-            alt="Picture of the author"
-            className="rounded-full"
-            width={38}
-            height={38}
-          />
-        </a>
+      <Link href="" className="user-link mr-2">
+        <Image loader={() => src} src={src} alt="Picture of the author" className="rounded-full" width={38} height={38} />
       </Link>
       <div className="comment-box flex-1">
         <div className="commnet-main mb-3">
@@ -55,9 +46,7 @@ const CommentItem = ({ PropData }: PostPageProps) => {
         {isReply && <div className="comment-reply-wrap mb-3"><CommentInput parentId={parentId} /></div>}
         <div className="sub-comment-wrap">
           {r.children?.length > 0 && r.children.map((c: any) => {
-            return (
-              <CommentItem key={c.id} PropData={c} />
-            )
+            return (<CommentItem key={c.id} PropData={c} />)
           })}
         </div>
       </div>

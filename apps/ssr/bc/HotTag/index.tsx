@@ -1,12 +1,15 @@
 import { TagColorList } from '@/config'
 import { Category } from '@carbon/icons-react'
 import { Space, Empty } from 'antd'
+import Link from 'next/link'
 
 type PostPageProps = {
   tags: any,
 }
 
 export function HotTag({ tags }: PostPageProps) {
+  if (!tags?.length) return null
+
   return (
     <div className="sider-items app-tags-model">
       <div className="sider-title">
@@ -17,7 +20,7 @@ export function HotTag({ tags }: PostPageProps) {
           {tags?.length > 0 && tags.map((t: any, index: number) => {
             const color = TagColorList[index % 15]
             return (
-              <a target="_blank" key={t.id} style={{ background: color }} className="ml-1 badge-tag text-white" rel="noreferrer">{t.tag_name}</a>
+              <Link target="_blank" href={`/tag/${t.id}`} key={t.id} style={{ background: color }} className="ml-1 badge-tag text-white" rel="noreferrer">{t.tag_name}</Link>
             )
           })}
         </Space>

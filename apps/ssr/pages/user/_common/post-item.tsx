@@ -3,9 +3,12 @@ import { Button, Popconfirm } from 'antd'
 import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
 import { EditOutlined, DeleteOutlined } from '@ant-design/icons'
 import Link from 'next/link'
+import { IsBrowser } from '@/components/IsBrowser'
 
 const Item = ({ data: r }: any) => {
-  const editType = r.md ? 'type=md&' : ''
+  if (!r?.id) return null
+
+  const editType = r?.md ? 'type=md&' : ''
   const onDelete = (id: string) => {
     alert(id)
   }
@@ -13,7 +16,7 @@ const Item = ({ data: r }: any) => {
   return (
     <div data-key={r.id} className="article-item relative white p-2">
       <h1>
-        <Link href={`/article/${r.id}`}><a target="_blank" rel="noreferrer">{r.title}</a></Link>
+        <Link href={`/article/${r?.id}`} target="_blank" rel="noreferrer">{r.title}</Link>
       </h1>
       <div className="article-body" dangerouslySetInnerHTML={{ __html: r.summary }} />
       <div className="article-footer flex justify-between">
@@ -41,14 +44,14 @@ const Item = ({ data: r }: any) => {
         </div>
       </div>
       <div className="action absolute">
-        <Link href={`/editor?${editType}id=${r.id}`}>
-          <a target="_blank" rel="noreferrer">
-            <Button type="link" icon={<EditOutlined />}>编辑</Button>
-          </a>
+        <Link href={`/editor?${editType}id=${r?.id}`} target="_blank" rel="noreferrer">
+          <Button type="link" icon={<EditOutlined />}>编辑</Button>
         </Link>
-        <Popconfirm title="确认要删除吗?" onConfirm={() => onDelete(r.id)}>
-          <Button type="link" danger icon={<DeleteOutlined />}>删除</Button>
-        </Popconfirm>
+        <IsBrowser>
+          <Popconfirm title="确认要删除吗?" onConfirm={() => onDelete(r.id)}>
+            <Button type="link" danger icon={<DeleteOutlined />}>删除</Button>
+          </Popconfirm>
+        </IsBrowser>
       </div>
     </div>
   )

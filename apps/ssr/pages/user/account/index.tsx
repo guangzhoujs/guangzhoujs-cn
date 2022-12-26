@@ -56,7 +56,7 @@ const Account = () => {
   return (
     <UserLayout>
       <Head>
-        <title>账户设置 - {title}</title>
+        <title>{`账户设置 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-user-page-model app-page-bg app-user-setting-model">

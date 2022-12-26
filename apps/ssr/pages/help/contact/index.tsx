@@ -1,10 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import Head from 'next/head'
 import Layout from '@/layouts/home'
+import Logo from '@/public/images/logo.png'
+import QQ from '@/public/images/qq.jpg'
 import AppConfig from '@/config'
-import { Divider, Image } from 'antd'
-import Link from 'next/link'
+import { Divider } from 'antd'
+import Image from 'next/image'
 import { IsBrowser } from '@/components/IsBrowser'
+import Link from 'next/link'
 
 const Contact = () => {
   const { title, description } = AppConfig
@@ -12,7 +15,7 @@ const Contact = () => {
   return (
     <Layout>
       <Head>
-        <title>首页 - {title}</title>
+        <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
       </Head>
       <div className="app-page-model container mx-auto my-6 p-6 app-page-bg">
@@ -22,7 +25,7 @@ const Contact = () => {
         <Divider />
         <div className="app-about-body flex content-center justify-center">
           <div className="img mr-5">
-            <Image preview={false} alt="Vercel logo" src="/images/logo.png" width={200} height={150} />
+            <Image alt="广州前端Q群：175869166" src={Logo} width={200} height={150} />
           </div>
           <div className="main">
             <div className="app-main-title text-xl mb-4">
@@ -37,12 +40,12 @@ const Contact = () => {
                 </a>
               </p>
               <IsBrowser>
-                <Image src="/images/qq.jpg" width={170} height={250} />
+                <Image src={QQ} alt="Q群" width={170} height={250} />
               </IsBrowser>
               <Divider />
               <p>
-                <Link href="https://github.com/guangzhoujs/">
-                  <a className="text-blue-500" target="_blank" rel="noreferrer">https://github.com/guangzhoujs/</a>
+                <Link href="https://github.com/guangzhoujs/" className="text-blue-500" target="_blank" rel="noreferrer">
+                  https://github.com/guangzhoujs/
                 </Link>
               </p>
             </div>

@@ -5,21 +5,26 @@ import 'bytemd/dist/index.css'
 import 'juejin-markdown-themes/dist/juejin.min.css'
 import { RootStoreProvider } from '@/providers/RootStoreProvider'
 import BackToTop from '@/components/BackToTop'
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import type { AppProps } from 'next/app'
 import NextProgress from 'next-progress'
 import zhCN from 'antd/lib/locale/zh_CN'
 import { ConfigProvider } from 'antd'
 import { useCity } from '@/hooks/common'
-import Router from 'next/router'
 import { StoreKey } from '@/config'
 import { isBrowser } from '@/utils'
 
+const loading = (
+  <div className="loader-container">
+    <div className="loader" />
+  </div>
+)
+
 function MyApp({ Component, pageProps }: AppProps) {
-  const [user, setUser] = useState()
+  const [user, setUser] = useState<any>()
   const [isLogined, setIsLogined] = useState<boolean>(false)
   const { cityInfo } = useCity()
-  const [city, setCity] = useState()
+  const [city, setCity] = useState<any>()
   const fuser = isBrowser() && localStorage.getItem(StoreKey)
 
   // 城市信息
@@ -36,19 +41,22 @@ function MyApp({ Component, pageProps }: AppProps) {
       setUser(userInfo)
       setIsLogined(true)
     } else {
-      Router.push({ pathname: '/' })
+      setUser(null)
+      setIsLogined(false)
     }
   }, [fuser])
 
   return (
     <>
       <NextProgress delay={300} options={{ showSpinner: false }} />
-      <ConfigProvider locale={zhCN}>
-        <RootStoreProvider hydrationData={{ user, isLogined, city, setIsLogined }}>
-          <Component {...pageProps} />
-          <BackToTop />
-        </RootStoreProvider>
-      </ConfigProvider>
+      <Suspense fallback={loading}>
+        <ConfigProvider locale={zhCN}>
+          <RootStoreProvider hydrationData={{ user, isLogined, city, setIsLogined }}>
+            <Component {...pageProps} />
+            <BackToTop />
+          </RootStoreProvider>
+        </ConfigProvider>
+      </Suspense>
     </>
   )
 }
