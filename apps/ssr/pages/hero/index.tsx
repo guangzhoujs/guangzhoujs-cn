@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react'
 import { Tooltip, Empty } from 'antd'
 import Head from 'next/head'
 import Layout from '@/layouts/home'
-import AppConfig, { PageConfig } from '@/config'
+import AppConfig, { Avatar, PageConfig } from '@/config'
 import { fetchUserList } from '@/api/home'
 import { LogoGithub, Email } from '@carbon/icons-react'
 import { Pagination } from '@nextui-org/react'
@@ -11,6 +11,7 @@ import Weixin from '@/icons/weixin.svg'
 import Gitee from '@/icons/gitee.svg'
 import Zhihu from '@/icons/zhihu.svg'
 import QQ from '@/icons/qq.svg'
+import Corner from '@/public/svg/corner-mark.svg'
 import Image from 'next/image'
 import Router from 'next/router'
 
@@ -91,13 +92,15 @@ const Hero = ({ users, total }: PostPageProps) => {
           <div className="user-list-wrap">
             <ol className="user-list grid grid-cols-5 gap-5">
               {userList?.length > 0 && userList.map((user: any) => {
-                const src = 'http://milu.blog/public/home/images/aboutme/about-me.jpg'
+                const url = user.github
+                const src = user?.avatar ? user?.avatar : Avatar
 
                 return (
-                  <li key={user.id} className="hero-list-item app-page-bg p-5">
-                    <a href="http://jikey.cnblogs.com" target="_blank" className="userinfo-img" rel="noreferrer">
+                  <li key={user.id} className="hero-list-item app-page-bg p-5 relative">
+                    {user.is_qq_admin > 0 && <span className="app-manage-icon absolute"><Corner /></span>}
+                    <a href={url} target="_blank" className="userinfo-img" rel="noreferrer">
                       <Image
-                        loader={() => src}
+                        loader={() => Avatar}
                         src={src}
                         alt="Picture of the author"
                         className="rounded-full"
@@ -107,7 +110,7 @@ const Hero = ({ users, total }: PostPageProps) => {
                     </a>
                     <div className="user-title">
                       <h2>
-                        <a href="http://jikey.cnblogs.com" target="_blank" className="text-2xl" rel="noreferrer">{user.nick_name}</a>
+                        <a href={url} target="_blank" className="text-2xl" rel="noreferrer">{user.nick_name}</a>
                       </h2>
                     </div>
                     <div className="useinfo-word border-b border-solid border-gray-300 mb-3">
@@ -138,7 +141,7 @@ const Hero = ({ users, total }: PostPageProps) => {
   )
 }
 
-export async function getStaticProps({ query }: any) {
+export async function getServerSideProps({ query }: any) {
   const page = query?.page || 1
   const { rows: users, total } = await fetchUserList({ params: { page, limit: 10 } })
 

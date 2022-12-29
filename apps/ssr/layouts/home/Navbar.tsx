@@ -1,15 +1,15 @@
 import { useState } from 'react'
-import { Button, Input } from 'antd'
+import { Button } from 'antd'
 import { useRootStore } from '@/providers/RootStoreProvider'
 import { IsBrowser } from '@/components/IsBrowser'
-import { Search } from '@carbon/icons-react'
+import HeaderSearch from '../common/Search'
 import { observer } from 'mobx-react-lite'
 import UserInfo from '../common/UserInfo'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
-import Login from './Login'
 import Register from './Register'
 import config from '@/config'
+import Link from 'next/link'
+import Login from './Login'
 
 const navItems: { label: string, page?: string, link?: string }[] = [
   { label: '首页', page: '/' },
@@ -23,10 +23,6 @@ export default observer(function Header() {
   const [isLogin, setIsLogin] = useState(false)
   const [isRegister, setIsRegister] = useState(false)
   const { appStore: { isLogined, user } } = useRootStore()
-
-  const onSearch = () => {
-    alert('search')
-  }
 
   const handleOpen = () => {
     setIsLogin(true)
@@ -75,12 +71,7 @@ export default observer(function Header() {
             })}
           </div>
           <div className="app-header-search">
-            <div className="auto-suggest">
-              <Input type="text" placeholder="请输入关键词搜索…" onPressEnter={() => onSearch()} className="search-input" />
-            </div>
-            <Button className="btn search-to" onClick={onSearch}>
-              <Search />
-            </Button>
+            <HeaderSearch />
           </div>
           <div className="app-header-user -mr-1">
             <IsBrowser>

@@ -1,5 +1,7 @@
-import { isUndefined } from 'lodash'
 import { makeObservable, action, observable } from 'mobx'
+import { isUndefined } from 'lodash'
+import { removeToken } from '@/utils/auth'
+import { StoreKey } from '@/config'
 
 export type CounterHydration = {
   user: any
@@ -48,6 +50,13 @@ export default class AppStore {
 
   reset() {
     this.user = {}
+  }
+
+  logout() {
+    this.hydrate({ user: null, isLogined: false })
+    localStorage.removeItem(StoreKey)
+    localStorage.removeItem(`${StoreKey}-token`)
+    removeToken()
   }
 
   hydrate(data: CounterHydration) {

@@ -60,8 +60,10 @@ service.interceptors.response.use(
       txt = response?.data?.msg
     }
 
-    message.destroy()
-    message.error(txt)
+    if (isBrowser()) {
+      message.destroy()
+      message.error(txt)
+    }
 
     return Promise.reject(error)
   },

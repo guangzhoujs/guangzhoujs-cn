@@ -39,8 +39,7 @@ const ForgotPassword: FC<Iprops> = ({ isForgotPassword, setIsForgotPassword, set
     setLoading(true)
 
     const fParams = { type: method, params }
-    fetchRegister(fParams).then((res: any) => {
-      console.log('res', res)
+    fetchRegister(fParams).then(() => {
       message.success(txt)
 
       setTimeout(() => {

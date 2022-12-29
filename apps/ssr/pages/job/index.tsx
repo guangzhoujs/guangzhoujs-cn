@@ -31,7 +31,7 @@ const Job = ({ articles, hots, tags }: PostPageProps) => {
   )
 }
 
-export async function getStaticProps() {
+export async function getServerSideProps() {
   const { rows: articles } = await fetchArticleList({ params: { ...PageConfig.base, category_id } })
   const { rows: hots } = await fetchArticleHot()
   const { rows: tags } = await fetchTagsList()

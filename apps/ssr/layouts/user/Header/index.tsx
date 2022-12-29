@@ -1,7 +1,6 @@
-import { Button, Input } from 'antd'
-import { Search } from '@carbon/icons-react'
 import { IsBrowser } from '@/components/IsBrowser'
 import { useRootStore } from '@/providers/RootStoreProvider'
+import HeaderSearch from '@/layouts/common/Search'
 import UserInfo from '@/layouts/common/UserInfo'
 import Logo from '@/public/images/logo.png'
 import Image from 'next/image'
@@ -9,10 +8,6 @@ import Link from 'next/link'
 
 export default function AppHeader() {
   const { appStore: { user } } = useRootStore()
-
-  const onSearch = () => {
-    alert('search')
-  }
 
   // 已登录
   const logined = <UserInfo user={user} />
@@ -30,12 +25,7 @@ export default function AppHeader() {
           </div>
           <div className="app-user-helper flex items-center">
             <div className="app-header-search">
-              <div className="auto-suggest">
-                <Input type="text" placeholder="请输入关键词搜索…" onPressEnter={() => onSearch()} className="search-input" />
-              </div>
-              <Button className="btn search-to" onClick={onSearch}>
-                <Search />
-              </Button>
+              <HeaderSearch />
             </div>
             <div className="app-header-user">
               <IsBrowser>

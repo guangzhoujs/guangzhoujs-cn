@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button, Form, Input, Row, Col, Popconfirm, Space, Image } from 'antd'
 // import Image from 'next/image'
-import AppConfig, { fallback } from '@/config'
+import AppConfig, { Fallback } from '@/config'
+import { getUserInfo, notice } from '@/utils'
 import AppUpload from '@/components/AppUpload'
 import UserLayout from '@/layouts/user'
 import { fetchUser } from '@/api/home'
 import { Method } from 'axios'
 import Head from 'next/head'
-import { getUserInfo, notice } from '@/utils'
 
 const { TextArea } = Input
 
@@ -158,7 +158,7 @@ const Profile = () => {
                     <div className="upload-image">
                       <Space direction="vertical" size={15} className="thumb-space">
                         <Image
-                          fallback={fallback}
+                          fallback={Fallback}
                           width={150}
                           height={150}
                           src={API_URL + data.avatar}

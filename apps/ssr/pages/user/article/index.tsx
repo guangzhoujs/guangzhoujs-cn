@@ -1,19 +1,33 @@
+import { useRootStore } from '@/providers/RootStoreProvider'
 import Head from 'next/head'
 import UserLayout from '@/layouts/user'
 import AppConfig, { PageConfig } from '@/config'
 import { fetchUserArticleList } from '@/api/home'
 import Content from '../_common/post-content'
 import { setServiceToken } from '@/utils/request'
+import { useEffect } from 'react'
+import Router from 'next/router'
 
 type PostPageProps = {
   articles: any
+  code: number
 }
 
 const parent_id = 1
 const category_id = '0'
-const Article = ({ articles }: PostPageProps) => {
+const Article = ({ articles, code }: PostPageProps) => {
+  const { appStore } = useRootStore()
   const { title, description } = AppConfig
 
+  useEffect(() => {
+    if (code === 20002) {
+      appStore.logout()
+
+      setTimeout(() => {
+        Router.push({ pathname: '/' })
+      }, 3000)
+    }
+  }, [code])
   return (
     <UserLayout>
       <Head>
@@ -34,11 +48,8 @@ export async function getServerSideProps({ req }: any) {
     const { rows: articles } = await fetchUserArticleList({ params: { ...PageConfig.base, parent_id, category_id } })
     return { props: { articles } }
   } catch (err: any) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
+    if (err.response) {
+      return { props: err.response.data }
     }
   }
 }

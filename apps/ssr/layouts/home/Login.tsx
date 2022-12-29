@@ -78,7 +78,6 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
 
   const onFinish = () => {
     validateFields().then(async (values: any) => {
-      // Object.assign(values, {  })
       handleFinish(qs.stringify(values))
     })
   }
@@ -101,9 +100,12 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
     message.warn('请联系管理员')
   }
 
+  const initialValues = {}
+  // const initialValues = { username: 'admin', password: '123456' }
+
   return (
-    <Modal title="注册登录" className="app-auth-dialog" forceRender open={isLogin} onOk={onFinish} width={450} footer={null} destroyOnClose onCancel={handleCancel} afterClose={afterClose}>
-      <Form className="app-login-form" name="basic" layout="vertical" form={form} preserve={false} requiredMark={false} onFinish={onFinish} initialValues={{ username: 'admin', password: '123456' }}>
+    <Modal title="登录" className="app-auth-dialog" forceRender open={isLogin} onOk={onFinish} width={450} footer={null} destroyOnClose onCancel={handleCancel} afterClose={afterClose}>
+      <Form className="app-login-form" name="basic" layout="vertical" form={form} preserve={false} requiredMark={false} onFinish={onFinish} initialValues={initialValues}>
         <Form.Item name="username" rules={rules.username}>
           <Input size="large" autoComplete="off" prefix={<UserOutlined />} placeholder="请输入用户名" />
         </Form.Item>

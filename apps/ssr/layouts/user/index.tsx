@@ -15,6 +15,10 @@ export default function UserLayout({ children }: any) {
   useEffect(() => {
     if (!fuser) {
       Router.push({ pathname: '/' })
+
+      setTimeout(() => {
+        window.location.reload()
+      }, 500)
     }
   }, [fuser])
 

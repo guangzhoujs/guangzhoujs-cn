@@ -14,7 +14,7 @@ type PostPageProps = {
 }
 
 const parent_id = 1
-const Home = ({ articles, hots, tags }: PostPageProps) => {
+const Search = ({ articles, hots, tags }: PostPageProps) => {
   const { title, description } = AppConfig
 
   return (
@@ -25,6 +25,7 @@ const Home = ({ articles, hots, tags }: PostPageProps) => {
       </Head>
       <div className="app-home-container flex container mx-auto mt-6">
         <div className="app-main flex-1">
+          <h3 style={{ height: '40px', lineHeight: '40px' }}>搜索结果：</h3>
           {articles.length > 0 && articles.map((r: any) => {
             return (
               <div key={r.id} className="article-item app-page-bg relative white mb-6">
@@ -67,8 +68,9 @@ const Home = ({ articles, hots, tags }: PostPageProps) => {
   )
 }
 
-export async function getServerSideProps() {
-  const { rows: articles } = await fetchArticleList({ params: { ...PageConfig.base, parent_id } })
+export async function getServerSideProps({ query }: any) {
+  const { keywords } = query
+  const { rows: articles } = await fetchArticleList({ params: { ...PageConfig.base, parent_id, title: keywords } })
   const { rows: hots } = await fetchArticleHot()
   const { rows: tags } = await fetchTagsList()
 
@@ -77,4 +79,4 @@ export async function getServerSideProps() {
   }
 }
 
-export default Home
+export default Search

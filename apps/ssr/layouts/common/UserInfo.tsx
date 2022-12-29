@@ -3,24 +3,21 @@ import { Dropdown, Menu, Space } from 'antd'
 import { ProfileOutlined, UserAddOutlined, LoginOutlined } from '@ant-design/icons'
 import { useRootStore } from '@/providers/RootStoreProvider'
 import { UserProfile, UserSettings } from '@carbon/icons-react'
-import { removeToken } from '@/utils/auth'
-import { StoreKey } from '@/config'
 import { isBrowser } from '@/utils'
+import Image from 'next/image'
 import Router from 'next/router'
 import Link from 'next/link'
+import { Avatar } from '@/config'
 
 const toHome = (appStore: any) => {
   if (isBrowser()) {
-    appStore.hydrate({ user: null, isLogined: false })
-    localStorage.removeItem(StoreKey)
-    localStorage.removeItem(`${StoreKey}-token`)
-    removeToken()
+    appStore.logout()
   }
 
   setTimeout(() => {
     Router.push({ pathname: '/' })
     window.location.reload()
-  }, 1000)
+  }, 500)
 }
 
 const onDropMenu = (e: any, appStore: any) => {
@@ -76,9 +73,23 @@ const UserInfo = ({ user }: any) => {
     </Menu>
   )
 
+  const src = user?.avatar ? user?.avatar : Avatar
+
   return (
     <Dropdown overlay={dropMenu} placement="bottom">
-      <div>{user.nick_name}</div>
+      <Space className="app-user-nick">
+        <span className="avatar">
+          <Image
+            loader={() => Avatar}
+            src={src}
+            alt="Picture of the author"
+            className="rounded-full"
+            width={30}
+            height={30}
+          />
+        </span>
+        <span>{user.nick_name}</span>
+      </Space>
     </Dropdown>
   )
 }

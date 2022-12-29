@@ -72,8 +72,8 @@
       background-color:var(--theme-color);
       font-size:16px;
       font-weight:700;
-      height:35px;
-      line-height:35px;
+      height:37px;
+      line-height:37px;
       padding:0;
       position:absolute;
       right:0;
@@ -87,6 +87,8 @@
   }
   .app-header-user{
     cursor:pointer;
+    min-width:140px;
+    text-align:center;
     a{
       color:#8590a6;
     }
@@ -313,9 +315,9 @@
   border-radius:var(--radius-wrap);
   box-shadow:var(--box-shadow);
   background:var(--background);
-  &:last-child{
-    margin-bottom:0;
-  }
+  //&:last-child{
+  //  margin-bottom:0;
+  //}
   .sider-title{
     position:relative;
     display:-webkit-box;
@@ -1065,14 +1067,14 @@
   .app-icon{
     width:120px;
     height:120px;
-    border-radius: 10px;
-    color: #fff;
+    border-radius:10px;
+    color:#fff;
     font-size:40px;
     line-height:120px;
     text-align:center;
-    transition: all .2s ease-in-out;
+    transition:all .2s ease-in-out;
     &:hover{
-      transform: scale(1.15);
+      transform:scale(1.15);
     }
   }
   .item-url{
@@ -1083,10 +1085,23 @@
     }
     .desc{
       font-size:14px;
-      color: #999;
+      color:#999;
     }
   }
 }
 .app-user-layout{
-  flex-direction: row;
+  flex-direction:row;
+}
+.app-search-form{
+  .ant-form-item-control-input{
+    & + div{
+      position:absolute;
+      top:30px;
+    }
+  }
+}
+.app-manage-icon{
+  top:-2px;
+  right:0;
+  z-index:3;
 }
