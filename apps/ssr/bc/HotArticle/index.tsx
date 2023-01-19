@@ -1,3 +1,4 @@
+import { EmptyStatus } from '@/config'
 import { Blog } from '@carbon/icons-react'
 import { Empty } from 'antd'
 import Link from 'next/link'
@@ -7,7 +8,7 @@ type PostPageProps = {
 }
 
 export function HotArticle({ hots }: PostPageProps) {
-  if (!hots?.length) return null
+  if (!hots?.length) return EmptyStatus
 
   return (
     <div className="sider-items app-hot-article">

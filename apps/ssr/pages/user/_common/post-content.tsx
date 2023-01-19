@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react'
-import { Empty, Spin } from 'antd'
+import { Spin } from 'antd'
 import { LoadingOutlined } from '@ant-design/icons'
 import InfiniteScroll from 'react-infinite-scroll-component'
 import { fetchUserArticleList } from '@/api/home'
 import { useRouter } from 'next/router'
-import { PageConfig } from '@/config'
+import { EmptyStatus, PageConfig } from '@/config'
 import Item from './post-item'
 
 const antIcon = <LoadingOutlined style={{ fontSize: 24 }} spin />
@@ -29,7 +29,7 @@ const Content = ({ data, category_id, parent_id }: any) => {
     getMoreArticle()
   }, [])
 
-  if (!posts?.length) return null
+  if (!posts?.length) return EmptyStatus
 
   return (
     <>
@@ -38,7 +38,6 @@ const Content = ({ data, category_id, parent_id }: any) => {
         next={() => {
           setPageNum((old: number) => {
             const newPage = old + 1
-            console.log('newPage', newPage)
 
             getMoreArticle(newPage)
             return newPage
@@ -51,7 +50,7 @@ const Content = ({ data, category_id, parent_id }: any) => {
             <Spin indicator={antIcon} />
           </div>
         )}
-        endMessage={<Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />}
+        endMessage={EmptyStatus}
       >
         {posts.length > 0 && posts.map((r: any) => {
           return (

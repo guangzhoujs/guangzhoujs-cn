@@ -1,4 +1,4 @@
-import { TagColorList } from '@/config'
+import { EmptyStatus, TagColorList } from '@/config'
 import { Category } from '@carbon/icons-react'
 import { Space, Empty } from 'antd'
 import Link from 'next/link'
@@ -8,7 +8,7 @@ type PostPageProps = {
 }
 
 export function HotTag({ tags }: PostPageProps) {
-  if (!tags?.length) return null
+  if (!tags?.length) return EmptyStatus
 
   return (
     <div className="sider-items app-tags-model">

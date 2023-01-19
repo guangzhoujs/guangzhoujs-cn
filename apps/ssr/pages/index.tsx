@@ -15,13 +15,14 @@ type PostPageProps = {
 
 const parent_id = 1
 const Home = ({ articles, hots, tags }: PostPageProps) => {
-  const { title, description } = AppConfig
+  const { title, description, keywords } = AppConfig
 
   return (
     <Layout>
       <Head>
         <title>{`首页 - ${title}`}</title>
         <meta name="description" content={description} />
+        <meta name="keywords" content={keywords} />
       </Head>
       <div className="app-home-container flex container mx-auto mt-6">
         <div className="app-main flex-1">

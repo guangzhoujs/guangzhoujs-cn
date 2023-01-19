@@ -1,9 +1,10 @@
 import React from 'react'
 import { Calendar, View, ThumbsUp, Category } from '@carbon/icons-react'
+import { EmptyStatus } from '@/config'
 import Link from 'next/link'
 
 const JobItem = ({ data: r }: any) => {
-  if (!r?.id) return null
+  if (!r?.id) return EmptyStatus
 
   const link = `/job/${r.id}`
 

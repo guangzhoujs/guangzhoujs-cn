@@ -97,7 +97,7 @@ const Hero = ({ users, total }: PostPageProps) => {
 
                 return (
                   <li key={user.id} className="hero-list-item app-page-bg p-5 relative">
-                    {user.is_qq_admin > 0 && <span className="app-manage-icon absolute"><Corner /></span>}
+                    {user?.is_qq_admin > 0 && <span className="app-manage-icon absolute"><Corner /></span>}
                     <a href={url} target="_blank" className="userinfo-img" rel="noreferrer">
                       <Image
                         loader={() => Avatar}
@@ -110,7 +110,7 @@ const Hero = ({ users, total }: PostPageProps) => {
                     </a>
                     <div className="user-title">
                       <h2>
-                        <a href={url} target="_blank" className="text-2xl" rel="noreferrer">{user.nick_name}</a>
+                        <a href={url} target="_blank" className="text-2xl" rel="noreferrer">{user?.nick_name}</a>
                       </h2>
                     </div>
                     <div className="useinfo-word border-b border-solid border-gray-300 mb-3">

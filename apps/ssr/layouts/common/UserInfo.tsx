@@ -88,7 +88,7 @@ const UserInfo = ({ user }: any) => {
             height={30}
           />
         </span>
-        <span>{user.nick_name}</span>
+        <span>{user?.nick_name}</span>
       </Space>
     </Dropdown>
   )
