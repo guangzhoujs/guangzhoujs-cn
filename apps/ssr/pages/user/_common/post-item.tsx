@@ -20,7 +20,7 @@ const Item = ({ data: r }: any) => {
       </h1>
       <div className="article-body" dangerouslySetInnerHTML={{ __html: r.summary }} />
       <div className="article-footer flex justify-between">
-        <div className="title-info-list flex justify-between">
+        <div className="title-info-list assist flex justify-between">
           <div className="date">
             <Calendar />
             <b>{r.create_time}</b>

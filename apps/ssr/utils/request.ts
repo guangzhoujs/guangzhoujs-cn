@@ -1,7 +1,8 @@
 import Axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios'
 import { message } from 'antd'
-import { CodeMessage, StoreKey, TokenKey } from '@/config'
+import { CodeMessage, StoreKey, TokenKey, CITY_CODE } from '@/config'
 import { isBrowser } from '.'
+
 // import qs from 'qs'
 
 export interface BaseResponse<T = any> {
@@ -9,6 +10,9 @@ export interface BaseResponse<T = any> {
   data: T
   message: string
 }
+
+// 默认参数
+const source = { city_code: CITY_CODE }
 
 export const service = Axios.create({
   baseURL: `${process.env.NEXT_PUBLIC_API_URL}/web/`,
@@ -21,6 +25,12 @@ service.interceptors.request.use(
     if (isBrowser()) {
       const token = localStorage.getItem(`${StoreKey}-token`)
       token && (config!.headers!.Authorization = `Bearer ${token}`)
+    }
+
+    if (['get', 'delete'].includes(config.method as string)) {
+      config.params ? Object.assign(config.params, source) : (config.params = source)
+    } else {
+      config.data ? Object.assign(config.data, source) : (config.data = source)
     }
 
     return config

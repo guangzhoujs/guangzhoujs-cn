@@ -18,7 +18,7 @@ class MyDocument extends Document {
           <meta name="description" content={description} />
           <CommonScript />
         </Head>
-        <body className="light dark:bg-night">
+        <body className="light dark:bg-night version-2">
           <Main />
           <NextScript />
         </body>

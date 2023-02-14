@@ -55,3 +55,5 @@ export const Avatar = 'data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIAAAACACAY
 // tinymce key
 export const TinyKey = 'i9loif5tptrktatd5nsxz66i1iqnijfpotc1lqs9mf24za7q'
 export const EmptyStatus = <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
+// 百度统计
+export const baiduGA = 'https://hm.baidu.com/hm.js?195fc7f138f23c1b47a959826ca8e4b6'

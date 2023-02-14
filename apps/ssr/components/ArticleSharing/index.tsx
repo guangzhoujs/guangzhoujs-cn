@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { ThumbsUpFilled, Chat, Share } from '@carbon/icons-react'
 import { message, Popover } from 'antd'
 import { scrollTo } from '@/utils'
@@ -11,16 +11,23 @@ import Society from './society'
 const ArticleSharing = ({ PropData }: any) => {
   const idsKey = `${StoreKey}.article.likes.ids`
   const { id: articleId, likes, comment_count } = PropData
-  const [likedIds, setLikedIds] = useState([''])
+  const [likedIds, setLikedIds] = useState<number[]>([])
   const [liked, setLiked] = useState(false)
 
-  const isLiked = (id: string) => {
-    return likedIds.includes(id)
-  }
+  useEffect(() => {
+    const idsStr = localStorage.getItem(idsKey)
+    const ids = idsStr && JSON.parse(idsStr)
+
+    if (ids) {
+      setLiked(true)
+    }
+  }, [])
+
+  const isLiked = (id: number) => likedIds.includes(id)
 
   // 处理成功
-  const handleOk = (data: any) => {
-    setLiked(data)
+  const handleOk = () => {
+    setLiked(true)
     setLikedIds([...likedIds, articleId])
 
     localStorage.setItem(idsKey, JSON.stringify([...likedIds, articleId]))
@@ -30,8 +37,8 @@ const ArticleSharing = ({ PropData }: any) => {
     const method: Method = 'post'
     const params = { type: method, id: `${articleId}`, params: { likes: likes + 1 } }
 
-    fetchArticleLikes(params).then((res) => {
-      handleOk(res?.data)
+    fetchArticleLikes(params).then(() => {
+      handleOk()
     })
   }
 

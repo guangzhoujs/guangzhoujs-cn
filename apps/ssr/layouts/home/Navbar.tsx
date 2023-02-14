@@ -6,8 +6,8 @@ import HeaderSearch from '../common/Search'
 import { observer } from 'mobx-react-lite'
 import UserInfo from '../common/UserInfo'
 import { useRouter } from 'next/router'
+import Logo from '@/components/Logo'
 import Register from './Register'
-import config from '@/config'
 import Link from 'next/link'
 import Login from './Login'
 
@@ -51,9 +51,7 @@ export default observer(function Header() {
       <div className="app-header-navbar container white shadow-4 border-bottom pc-model">
         <div className="app-header-main">
           <div className="app-header-logo">
-            <span>
-              <Link href="/">{config.title}</Link>
-            </span>
+            <Logo />
           </div>
           <div className="app-header-nav">
             {navItems.map(({ label, page }: any) => {

@@ -47,17 +47,15 @@ function MyApp({ Component, pageProps }: AppProps) {
   }, [fuser])
 
   return (
-    <>
-      <NextProgress delay={300} options={{ showSpinner: false }} />
-      <Suspense fallback={loading}>
-        <ConfigProvider locale={zhCN}>
-          <RootStoreProvider hydrationData={{ user, isLogined, city, setIsLogined }}>
-            <Component {...pageProps} />
-            <BackToTop />
-          </RootStoreProvider>
-        </ConfigProvider>
-      </Suspense>
-    </>
+    <Suspense fallback={loading}>
+      <ConfigProvider locale={zhCN}>
+        <RootStoreProvider hydrationData={{ user, isLogined, city, setIsLogined }}>
+          <NextProgress delay={300} options={{ showSpinner: false }} />
+          <Component {...pageProps} />
+          <BackToTop />
+        </RootStoreProvider>
+      </ConfigProvider>
+    </Suspense>
   )
 }
 

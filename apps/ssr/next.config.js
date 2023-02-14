@@ -11,6 +11,7 @@ module.exports = withAntdLess({
     concurrentFeatures: true,
     serverComponents: true,
   },
+  distDir: '.out', // 打包后输出目录
 
   images: {
     domains: ['localhost', 'zhjs.top', 'guangzhoujs.cn'],

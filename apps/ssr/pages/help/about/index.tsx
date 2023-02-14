@@ -21,8 +21,8 @@ const About = () => {
         </div>
         <Divider />
         <div className="app-about-body flex content-center justify-center">
-          <div className="img mr-5">
-            <Image alt="Vercel logo" src={Logo} width={200} height={150} />
+          <div className="img mr-10">
+            <Image alt="Vercel logo" src={Logo} width={83} height={93} />
           </div>
           <div className="main">
             <div className="app-main-title text-xl mb-4">

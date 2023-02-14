@@ -67,7 +67,7 @@ const Hero = ({ users, total }: PostPageProps) => {
   const { title, description } = AppConfig
   const [userList, setUserList] = useState(users)
   const pageRef = useRef<any>(1)
-  const pageNum = total ? Math.round(total / PageConfig.base.limit) : 0
+  const pageNum = total ? Math.ceil(total / PageConfig.base.limit) : 0
 
   useEffect(() => {
     if (users?.length) {
@@ -144,6 +144,7 @@ const Hero = ({ users, total }: PostPageProps) => {
 export async function getServerSideProps({ query }: any) {
   const page = query?.page || 1
   const { rows: users, total } = await fetchUserList({ params: { page, limit: 10 } })
+  console.log('total', total)
 
   return { props: { users, total } }
 }

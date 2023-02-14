@@ -20,11 +20,20 @@
       align-items:center;
       width:180px;
       min-width:180px;
-      span{
+      a{
+        &:hover{
+          span{
+            color: var(--theme-color);
+          }
+        }
+      }
+      .app-header-title{
         font-size:24px;
         font-weight:700;
         flex-grow:1;
         color:#3c4248;
+        position:relative;
+        top:5px;
       }
     }
     .app-header-nav{
@@ -51,6 +60,9 @@
       letter-spacing:1px;
       color:#8590a6;
       position:relative;
+      &:hover{
+        color:var(--theme-color);
+      }
     }
   }
   .app-header-search{
@@ -233,6 +245,9 @@
   .category{
     a{
       color:#9d9d9d;
+      &:hover{
+        color:var(--theme-color);
+      }
     }
   }
 }
@@ -1041,6 +1056,10 @@
 }
 .app-hero-empty{
   min-height:calc(100vh - 290px);
+}
+.app-manage-icon{
+  top:-2px;
+  right:0;
 }
 .app-not-found{
   padding-top:20%;

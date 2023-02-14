@@ -4,11 +4,13 @@ import Link from 'next/link'
 
 const Item = ({ data: r }: any) => {
   if (!r?.id) return null
+  const url = `/article/${r?.id}`
+  const categoryUrl = `/article/category/${r?.category.id}`
 
   return (
     <div data-key={r?.id} className="article-item relative white p-2">
       <h1>
-        <Link href={`/article/${r?.id}`} target="_blank" rel="noreferrer">{r.title}</Link>
+        <Link href={url} target="_blank" rel="noreferrer">{r.title}</Link>
       </h1>
       <div className="article-body" dangerouslySetInnerHTML={{ __html: r.summary }} />
       <div className="article-footer flex justify-between">
@@ -29,7 +31,7 @@ const Item = ({ data: r }: any) => {
           </div>
         </div>
         <div className="category">
-          <Link title="Golang" href="/blog/category/17">
+          <Link title={r.category.title} href={categoryUrl}>
             <Category />
             <b>{r.category.title}</b>
           </Link>

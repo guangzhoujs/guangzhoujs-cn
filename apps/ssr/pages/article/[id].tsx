@@ -21,7 +21,7 @@ type PostPageProps = {
 const Detail = ({ hc, commentData, hots, tags }: PostPageProps) => {
   const { title, description } = AppConfig
   const { commentList } = commentData
-  const src = 'https://pica.zhimg.com/691df473a_is.jpg?source=32738c0c'
+  const src = ''
 
   const CommentProviderData = useMemo(
     () => ({ commentData }),
@@ -47,7 +47,7 @@ const Detail = ({ hc, commentData, hots, tags }: PostPageProps) => {
                   <Image
                     loader={() => src}
                     src={src}
-                    alt="Picture of the author"
+                    alt={hc.title}
                     className="rounded-full"
                     width={50}
                     height={50}

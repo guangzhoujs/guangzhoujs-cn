@@ -117,7 +117,7 @@ const Editor = ({ type }: PageProps) => {
   // 默认值
   const defaultValues = {
     is_top: 2, // 是否置顶
-    statue: 1, // 状态
+    status: 1, // 状态
     city_code: CITY_CODE, // 城市编码
     author: getUserInfo()?.nick_name, // 作者
   }
