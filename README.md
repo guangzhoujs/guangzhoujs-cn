@@ -1,7 +1,7 @@
-# vue-admin-cn
+# guangzhoujs.cn
 
 #### 介绍
-[http://vue-admin.cn](http://vue-admin.cn)
+[https://guangzhoujs.cn](https://guangzhoujs.cn)
 
 #### 软件架构
 软件架构说明
