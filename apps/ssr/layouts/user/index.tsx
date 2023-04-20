@@ -1,5 +1,5 @@
-import { StoreKey } from '@/config'
 import { isBrowser } from '@/utils'
+import { getToken } from '@/utils/auth'
 import { Layout } from 'antd'
 import Router from 'next/router'
 import { useEffect } from 'react'
@@ -9,18 +9,18 @@ import AppHeader from './Header'
 import AppSider from './Sider'
 
 export default function UserLayout({ children }: any) {
-  const fuser = isBrowser() && localStorage.getItem(StoreKey)
+  const token = isBrowser() && getToken()
 
   // 用户信息
   useEffect(() => {
-    if (!fuser) {
+    if (!token) {
       Router.push({ pathname: '/' })
 
-      setTimeout(() => {
-        window.location.reload()
-      }, 500)
+      // setTimeout(() => {
+      //   window.location.reload()
+      // }, 500)
     }
-  }, [fuser])
+  }, [])
 
   return (
     <Layout className="app-user-box">

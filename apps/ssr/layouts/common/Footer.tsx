@@ -1,10 +1,8 @@
-import { useRootStore } from '@/providers/RootStoreProvider'
 import config from '@/config'
 import Link from 'next/link'
 import { IsBrowser } from '@/components/IsBrowser'
 
 export default function Footer() {
-  const { appStore: { city } } = useRootStore()
   const year = (new Date()).getFullYear()
 
   return (
@@ -21,7 +19,7 @@ export default function Footer() {
         </div>
         <IsBrowser>
           <div className="copyright text-xs font-sans">
-            <span className="mr-3"><Link href="/" className="text-blue-600">{city?.host}</Link></span>
+            <span className="mr-3"><a href="https://beian.miit.gov.cn/#/Integrated/index" target="_blank" rel="noreferrer noopener">沪ICP备2022009358号-2</a></span>
             <span> © {year}. All rights reserved.</span>
           </div>
         </IsBrowser>

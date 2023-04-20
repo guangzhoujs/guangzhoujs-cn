@@ -1,7 +1,9 @@
 import Axios, { AxiosRequestConfig, AxiosResponse, Method } from 'axios'
 import { message } from 'antd'
-import { CodeMessage, StoreKey, TokenKey, CITY_CODE } from '@/config'
+import { CodeMessage, TokenKey, CITY_CODE } from '@/config'
 import { isBrowser } from '.'
+import Router from 'next/router'
+import { getToken } from './auth'
 
 // import qs from 'qs'
 
@@ -23,7 +25,7 @@ service.interceptors.request.use(
   (config: AxiosRequestConfig) => {
     // config.data = qs.stringify(config.data) // 转为 formdata 数据格式
     if (isBrowser()) {
-      const token = localStorage.getItem(`${StoreKey}-token`)
+      const token = getToken()
       token && (config!.headers!.Authorization = `Bearer ${token}`)
     }
 
@@ -59,10 +61,11 @@ service.interceptors.response.use(
   (error: any) => {
     let txt = '系统异常，请稍候再试'
     const response: any = { ...error.response }
+    const code = response?.data?.code
 
     // 处理500类型，自定义报错信息
-    if (response?.data?.code) {
-      txt = CodeMessage[response?.data?.code]
+    if (code) {
+      txt = CodeMessage[code]
     }
 
     // 如果已经有错误信息
@@ -73,6 +76,13 @@ service.interceptors.response.use(
     if (isBrowser()) {
       message.destroy()
       message.error(txt)
+
+      if (code === 20002) {
+        setTimeout(() => {
+          Router.push({ pathname: '/' })
+          window.location.reload()
+        }, 500)
+      }
     }
 
     return Promise.reject(error)
@@ -143,4 +153,9 @@ export const fetchRequest = ({ api, id, type = 'get', params }: { api: string, i
 export const setServiceToken = (req: any) => {
   const token = req.cookies[TokenKey]
   service.defaults.headers.common.Authorization = `Bearer ${token}`
+}
+
+// 清空token
+export const removeServiceToken = (res: any) => {
+  res.setHeader('Set-Cookie', `${TokenKey}=; expires=Thu, 01 Jan 1970 00:00:00 GMT; Path=/`)
 }

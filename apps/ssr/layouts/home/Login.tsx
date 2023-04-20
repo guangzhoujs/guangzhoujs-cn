@@ -6,7 +6,7 @@ import ForgotPassword from './ForgotPassword'
 import { fetchUserLogin } from '@/api/home'
 import { setToken } from '@/utils/auth'
 import { isBrowser } from '@/utils'
-import { StoreKey } from '@/config'
+import { Domain, MasterDomain, MasterTokenKey, StoreKey } from '@/config'
 import { Method } from 'axios'
 import qs from 'qs'
 
@@ -43,6 +43,21 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
     form.resetFields()
   }
 
+  const toLogin = () => {
+    // const url = isDev() ? 'http://localhost:3007' : `http://${MasterDomain}`
+    // const url = process.env.NEXT_PUBLIC_Master_Domain
+    window.location.href = `http://${MasterDomain}/user/article?fromcity=${Domain}`
+  }
+
+  const cacheUserInfo = (token: string, userInfo: any) => {
+    setToken(token, MasterTokenKey)
+    setToken(token, MasterTokenKey, { domain: `.${MasterDomain}`, path: '/' })
+    localStorage.setItem(StoreKey, JSON.stringify(userInfo))
+    localStorage.setItem(MasterTokenKey, JSON.stringify(userInfo))
+
+    appStore.hydrate({ user: userInfo, isLogined: true })
+  }
+
   const handleFinish = (params: any) => {
     const method: Method = 'post'
     const txt = '登录成功'
@@ -59,10 +74,8 @@ const Login: FC<Iprops> = ({ isLogin, setIsLogin, setIsRegister }) => {
       }
 
       if (isBrowser() && token && userInfo) {
-        setToken(token)
-        localStorage.setItem(`${StoreKey}-token`, token)
-        localStorage.setItem(StoreKey, JSON.stringify(userInfo))
-        appStore.hydrate({ user: userInfo, isLogined: true })
+        cacheUserInfo(token, userInfo)
+        toLogin()
       }
 
       setTimeout(() => {

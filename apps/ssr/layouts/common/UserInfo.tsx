@@ -12,12 +12,12 @@ import { Avatar } from '@/config'
 const toHome = (appStore: any) => {
   if (isBrowser()) {
     appStore.logout()
-  }
 
-  setTimeout(() => {
-    Router.push({ pathname: '/' })
-    window.location.reload()
-  }, 500)
+    setTimeout(() => {
+      Router.push({ pathname: '/' })
+      window.location.reload()
+    }, 500)
+  }
 }
 
 const onDropMenu = (e: any, appStore: any) => {

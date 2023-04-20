@@ -55,7 +55,8 @@ export default class AppStore {
   logout() {
     this.hydrate({ user: null, isLogined: false })
     localStorage.removeItem(StoreKey)
-    localStorage.removeItem(`${StoreKey}-token`)
+    localStorage.removeItem(`${StoreKey}.token`)
+
     removeToken()
   }
 

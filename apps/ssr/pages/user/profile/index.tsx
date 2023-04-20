@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import { Card, Button, Form, Input, Row, Col, Popconfirm, Space, Image } from 'antd'
-// import Image from 'next/image'
-import AppConfig, { Fallback } from '@/config'
-import { getUserInfo, notice } from '@/utils'
+import { useRootStore } from '@/providers/RootStoreProvider'
+import { fetchUser, fetchUserInfo } from '@/api/home'
+import { setServiceToken } from '@/utils/request'
 import AppUpload from '@/components/AppUpload'
+import AppConfig, { Fallback } from '@/config'
 import UserLayout from '@/layouts/user'
-import { fetchUser } from '@/api/home'
+import { notice } from '@/utils'
+import Router from 'next/router'
 import { Method } from 'axios'
 import Head from 'next/head'
 
@@ -14,10 +16,15 @@ const { TextArea } = Input
 const defaultInit = {
 }
 
-const Profile = () => {
+type PageProps = {
+  user: any
+  code: number
+}
+
+export default function Profile({ user, code }: PageProps) {
   const { title, description } = AppConfig
-  const [data, setData] = useState<any>({})
-  const [loading, setLoading] = useState(false)
+  const { appStore } = useRootStore()
+  const [data, setData] = useState<any>(user)
   const [loading2, setLoading2] = useState(false)
   const [form] = Form.useForm()
   const { validateFields } = form
@@ -31,24 +38,29 @@ const Profile = () => {
     action: `${API_URL}/web/uploadImage`,
     showUploadList: false,
   }
+  console.log('user222', user)
 
   useEffect(() => {
-    setLoading(true)
-    const fetchData = async () => {
-      const user = getUserInfo()
-      const info = await fetchUser({ id: user?.id })
-      setData({ id: user?.id })
+    if (code === 20002) {
+      appStore.logout()
 
-      if (info) {
-        setData(info)
-        form.setFieldsValue(Object.assign(info, defaultInit))
-      }
-
-      setLoading(false)
+      setTimeout(() => {
+        Router.push({ pathname: '/' })
+      }, 3000)
     }
+  }, [code])
 
-    fetchData()
-  }, [])
+  useEffect(() => {
+    form.setFieldsValue(Object.assign(user, defaultInit))
+
+    if (!user.username) {
+      appStore.logout()
+
+      setTimeout(() => {
+        Router.push({ pathname: '/' })
+      }, 3000)
+    }
+  }, [user])
 
   const handleFinish = (params: any) => {
     let method: Method = 'post'
@@ -101,7 +113,7 @@ const Profile = () => {
         <meta name="description" content={description} />
       </Head>
       <div className="app-user-page-model app-page-bg app-user-setting-model">
-        <Card title="个人资料" bordered={false} loading={loading}>
+        <Card title="个人资料" bordered={false}>
           <Form
             form={form}
             name="basic"
@@ -154,7 +166,7 @@ const Profile = () => {
               </Col>
               <Col span={8}>
                 <Form.Item name="avatar" noStyle>
-                  {data.avatar ? (
+                  {data?.avatar.length > 0 ? (
                     <div className="upload-image">
                       <Space direction="vertical" size={15} className="thumb-space">
                         <Image
@@ -163,7 +175,7 @@ const Profile = () => {
                           height={150}
                           src={API_URL + data.avatar}
                         />
-                        <Popconfirm title="确定要删除吗?" onConfirm={() => onDelImg(data.avatar)}>
+                        <Popconfirm title="确定要删除吗?" onConfirm={() => onDelImg(data?.avatar)}>
                           <Button type="default" danger size="small">删除</Button>
                         </Popconfirm>
                       </Space>
@@ -180,4 +192,17 @@ const Profile = () => {
   )
 }
 
-export default Profile
+export async function getServerSideProps({ req }: any) {
+  // 保存token到客户端header
+  setServiceToken(req)
+
+  try {
+    const { info: user } = await fetchUserInfo()
+    console.log('user', user)
+    return { props: { user } }
+  } catch (err: any) {
+    if (err.response) {
+      return { props: err.response.data }
+    }
+  }
+}

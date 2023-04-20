@@ -1,12 +1,12 @@
 import { StoreKey, TokenKey } from '@/config'
-import Cookies from 'js-cookie'
+import Cookies, { CookieAttributes } from 'js-cookie'
 
 export function getToken() {
   return Cookies.get(TokenKey)
 }
 
-export function setToken(token: string) {
-  return Cookies.set(TokenKey, token)
+export function setToken(token: string, key = TokenKey, options?: CookieAttributes) {
+  return Cookies.set(key, token, options)
 }
 
 export function removeToken() {

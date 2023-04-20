@@ -1,6 +1,15 @@
 import { notification } from 'antd'
 import { AppContext } from 'next/app'
 import { StoreKey } from '@/config'
+import Router from 'next/router'
+
+export function isDev() {
+  return process.env.NODE_ENV === 'development'
+}
+
+export function isPro() {
+  return process.env.NODE_ENV === 'production'
+}
 
 export function isValidKey(key: string | number | symbol, object: object): key is keyof typeof object {
   return key in object
@@ -148,6 +157,19 @@ interface INotice {
   description?: string
 }
 
+// 通知
 export const notice = ({ type = 'success', message, description = '' }: INotice) => {
   notification[type]({ message, description })
+}
+
+// 跳转
+export const redirect = (ctx: any, target: any) => {
+  if (ctx.res) {
+    // server side
+    ctx.res.writeHead(303, { Location: target })
+    ctx.res.end()
+  } else {
+    // client side
+    Router.replace(target)
+  }
 }

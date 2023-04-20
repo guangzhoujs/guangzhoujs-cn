@@ -3,8 +3,12 @@ import pkg from '../package.json'
 import { Empty } from 'antd'
 
 // 存储key
-export const StoreKey = 'gz-js'
-export const TokenKey = `${StoreKey}-Token`
+export const Domain = 'guangzhoujs.cn'
+export const StoreKey = Domain
+export const TokenKey = `${StoreKey}.token`
+// export const MasterDomain = 'chinajs.top'
+export const MasterDomain = process.env.NEXT_PUBLIC_Master_Domain || ''
+export const MasterTokenKey = `${MasterDomain}.token`
 export const CITY_CODE = process.env.NEXT_PUBLIC_CITY_CODE || ''
 
 // 分页配置
@@ -17,7 +21,8 @@ export const PageConfig: any = {
 export default {
   name: pkg.name,
   version: pkg.version,
-  title: '羊城砍柴',
+  label: '羊城砍柴',
+  title: '个人前端信息收集-羊城砍柴人',
   author: 'Admin',
   description: '广州前端交流群 - 519033606',
   keywords: '广州前端,广州前端交流,广州前端求职内推',

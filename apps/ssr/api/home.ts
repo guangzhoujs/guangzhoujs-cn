@@ -36,6 +36,8 @@ export const fetchForgotPassword = (params?: any) => fetchRequest({ api: 'forgot
 export const fetchUserList = (params: any) => fetchRequest({ api: 'user/list', ...params })
 // 用户
 export const fetchUser = (params?: any) => fetchRequest({ api: 'user', ...params })
+// 用户信息
+export const fetchUserInfo = (params?: any) => fetchRequest({ api: 'user/info', ...params })
 // 用户文章列表
 export const fetchUserArticleList = (params?: any) => fetchRequest({ api: 'user/article/list', ...params })
 // 用户新增文章

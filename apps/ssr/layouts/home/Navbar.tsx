@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import { Button } from 'antd'
 import { useRootStore } from '@/providers/RootStoreProvider'
 import { IsBrowser } from '@/components/IsBrowser'
@@ -8,6 +8,9 @@ import UserInfo from '../common/UserInfo'
 import { useRouter } from 'next/router'
 import Logo from '@/components/Logo'
 import Register from './Register'
+import { isBrowser } from '@/utils'
+import { getToken } from '@/utils/auth'
+
 import Link from 'next/link'
 import Login from './Login'
 
@@ -19,10 +22,19 @@ const navItems: { label: string, page?: string, link?: string }[] = [
 ]
 
 export default observer(function Header() {
+  const token = isBrowser() && getToken()
   const { pathname } = useRouter()
   const [isLogin, setIsLogin] = useState(false)
   const [isRegister, setIsRegister] = useState(false)
-  const { appStore: { isLogined, user } } = useRootStore()
+  const { appStore } = useRootStore()
+  const { user } = appStore
+
+  // 用户信息
+  useEffect(() => {
+    if (!token) {
+      appStore.logout()
+    }
+  }, [])
 
   const handleOpen = () => {
     setIsLogin(true)
@@ -73,7 +85,7 @@ export default observer(function Header() {
           </div>
           <div className="app-header-user -mr-1">
             <IsBrowser>
-              {isLogined ? logined : notLogin}
+              {token ? logined : notLogin}
             </IsBrowser>
           </div>
         </div>

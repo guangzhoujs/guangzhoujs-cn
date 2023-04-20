@@ -1,5 +1,9 @@
-const RC = () => {
-  return <div>234234</div>
-}
+import Layout from '@/layouts/home'
 
-export default RC
+export default function Index() {
+  return (
+    <Layout>
+      <div className="app-page">123123</div>
+    </Layout>
+  )
+}

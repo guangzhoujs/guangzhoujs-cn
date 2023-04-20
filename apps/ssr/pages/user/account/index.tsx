@@ -43,7 +43,7 @@ const Account = () => {
       if (isBrowser()) {
         appStore.hydrate({ user: null, isLogined: false })
         localStorage.removeItem(StoreKey)
-        localStorage.removeItem(`${StoreKey}-token`)
+        localStorage.removeItem(`${StoreKey}.token`)
       }
 
       setTimeout(() => {

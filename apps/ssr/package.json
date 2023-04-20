@@ -2,7 +2,7 @@
   "name": "@guangzhoujs-cn/ssr",
   "version": "1.0.0",
   "scripts": {
-    "dev": "next dev -p 3006",
+    "dev": "next dev -p 3600",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",

@@ -5,9 +5,9 @@ import Img from '@/public/images/logo.png'
 
 export default function Logo() {
   return (
-    <Link className="app-log-link" href="/" title={config.title}>
+    <Link className="app-log-link" href="/" title={config.label}>
       <Image unoptimized src={Img} alt={config.title} className="mr-3" width={38} height={38} />
-      <span className="app-header-title">{config.title}</span>
+      <span className="app-header-title">{config.label}</span>
     </Link>
   )
 }
